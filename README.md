@@ -46,6 +46,11 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.12 (23/04/2026)**: 
+  - Actualización y precisión de stacks técnicos en proyectos destacados (Next.js, Prisma, MikroORM, MongoDB).
+  - Refinamiento de descripciones de proyectos para un tono más profesional.
+  - Sincronización integral de habilidades técnicas con las tecnologías utilizadas en los proyectos.
+  - Adición de acceso directo a **Contacto** en el navbar y menú móvil.
 - **v1.11 (23/04/2026)**: 
   - **Refinamiento Mobile**: Ajuste integral de paddings, tamaños de fuente y alineaciones para una experiencia móvil de alta calidad.
   - Refactorización de espaciados y migración de estilos inline a CSS para mayor simetría y mantenibilidad.

@@ -92,7 +92,10 @@ function App() {
         { name: "PHP", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" },
         { name: "C", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" },
         { name: "Pascal", icon: <Terminal size={14} /> },
-        { name: "Smalltalk", icon: <Terminal size={14} /> }
+        { name: "Smalltalk", icon: <Terminal size={14} /> },
+        { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
+        { name: "Prisma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
+        { name: "MikroORM", icon: <Database size={14} /> }
       ]
     },
     {
@@ -119,7 +122,9 @@ function App() {
         { name: "Tailwind", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
         { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
         { name: "Axure", icon: <PenTool size={14} /> },
-        { name: "Marvel", icon: <PenTool size={14} /> }
+        { name: "Marvel", icon: <PenTool size={14} /> },
+        { name: "Framer Motion", icon: <Activity size={14} /> },
+        { name: "Recharts", icon: <Activity size={14} /> }
       ]
     },
     {
@@ -163,7 +168,8 @@ function App() {
         { name: "Salesforce", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/salesforce/salesforce-original.svg" },
         { name: "Pandas", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" },
         { name: "NumPy", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" },
-        { name: "Continuous Improvement", icon: <Activity size={14} /> }
+        { name: "Continuous Improvement", icon: <Activity size={14} /> },
+        { name: "Vite", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" }
       ]
     }
   ];
@@ -200,6 +206,7 @@ function App() {
             <a href="#skills" onClick={() => setIsMenuOpen(false)} className={activeSection === 'skills' ? 'active' : ''}>{t.skills.title}</a>
             <a href="#certs" onClick={() => setIsMenuOpen(false)} className={activeSection === 'certs' ? 'active' : ''}>{t.certifications.title}</a>
             <a href="#projects" onClick={() => setIsMenuOpen(false)} className={activeSection === 'projects' ? 'active' : ''}>{t.nav.projects}</a>
+            <a href="#contact" onClick={() => setIsMenuOpen(false)} className={activeSection === 'contact' ? 'active' : ''}>{t.nav.contact}</a>
             <button
               onClick={() => { setShowCvModal(true); setIsMenuOpen(false); }}
               className="cv-nav-btn"
@@ -889,7 +896,7 @@ function App() {
 
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.11. Última actualización: 23/04/2026</div>
+            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.12. Última actualización: 23/04/2026</div>
           </div>
         </div>
       </footer>
