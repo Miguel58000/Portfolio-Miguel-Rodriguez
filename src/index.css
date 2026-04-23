@@ -1003,6 +1003,80 @@ section.container {
   justify-content: center;
 }
 
+/* Mobile Refinements */
+@media (max-width: 768px) {
+  section.container {
+    padding: 3rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-content {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-content {
+    padding: 1.5rem !important;
+    text-align: center;
+  }
+
+  .value-list {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+  }
+
+  .info-card {
+    padding: 1.5rem;
+  }
+
+  .footer-grid {
+    gap: 2rem;
+  }
+}
+
+.about-content {
+  padding: 3rem;
+  text-align: center;
+}
+
+.about-value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.value-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.value-icon {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.value-label {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
 @media (max-width: 480px) {
   .modal-content {
     padding: 2rem 1.5rem;
@@ -1015,4 +1089,9 @@ section.container {
   .modal-actions .btn {
     width: 100%;
   }
+}
+
+.value-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
 }

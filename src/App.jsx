@@ -294,12 +294,12 @@ function App() {
               <div className="image-placeholder" style={{ display: 'none' }}><Server size={100} /></div>
             </div>
           </div>
-          <div className="about-content glass text-center" style={{ padding: '2.5rem' }}>
+          <div className="about-content glass">
             <p className="mb-4">{t.about.p1}</p>
             <p className="mb-6">{t.about.p2}</p>
-            <div className="about-value" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div className="about-value-container">
               <h3 className="value-title gradient-text">{t.about.valueTitle}</h3>
-              <ul className="value-list" style={{ textAlign: 'left' }}>
+              <ul className="value-list">
                 <li>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
                     <Code2 className="value-icon" />
@@ -889,7 +889,7 @@ function App() {
 
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.10. Última actualización: 23/04/2026</div>
+            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.11. Última actualización: 23/04/2026</div>
           </div>
         </div>
       </footer>

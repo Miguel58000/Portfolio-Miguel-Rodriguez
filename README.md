@@ -12,7 +12,8 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 - **Responsive**: Totalmente adaptado para dispositivos móviles, tablets y escritorio.
 - **Sistema Multi-idioma**: Soporte completo para Español e Inglés.
 - **Modo Oscuro/Claro**: Selector de tema dinámico con persistencia.
-- **Animaciones Premium**: Reveal animations al hacer scroll y hovers interactivos.
+- **Animaciones Premium**: Reveal animations al hacer scroll y hovers interactivos usando Framer Motion.
+- **IA-Ready**: Sección dedicada a habilidades en Desarrollo utilizando IA y Prompt Engineering.
 - **Secciones Detalladas**:
   - Hero con resumen profesional.
   - Educación con línea de tiempo.
@@ -45,12 +46,14 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.11 (23/04/2026)**: 
+  - **Refinamiento Mobile**: Ajuste integral de paddings, tamaños de fuente y alineaciones para una experiencia móvil de alta calidad.
+  - Refactorización de espaciados y migración de estilos inline a CSS para mayor simetría y mantenibilidad.
 - **v1.10 (23/04/2026)**: 
   - Integración completa de **Framer Motion** para animaciones de scroll y transiciones.
   - Implementación de **Menú Hamburguesa** responsivo para mobile.
   - Optimización de descarga de CV: detección automática de idioma y modal de confirmación.
   - Actualización de contenido: sección de **Desarrollo con IA** y Prompt Engineering.
-  - Refactorización de espaciados para mayor simetría y legibilidad.
 - **v1.01 (20/04/2026)**: Mejora de footer y visualización de logos.
 - **v1.00 (15/04/2026)**: Lanzamiento inicial del portfolio responsivo con soporte bilingüe.
 
