@@ -43,6 +43,17 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
    npm run dev
    ```
 
+##  Historial de Versiones (Changelog)
+
+- **v1.10 (23/04/2026)**: 
+  - Integración completa de **Framer Motion** para animaciones de scroll y transiciones.
+  - Implementación de **Menú Hamburguesa** responsivo para mobile.
+  - Optimización de descarga de CV: detección automática de idioma y modal de confirmación.
+  - Actualización de contenido: sección de **Desarrollo con IA** y Prompt Engineering.
+  - Refactorización de espaciados para mayor simetría y legibilidad.
+- **v1.01 (20/04/2026)**: Mejora de footer y visualización de logos.
+- **v1.00 (15/04/2026)**: Lanzamiento inicial del portfolio responsivo con soporte bilingüe.
+
 ##  Contacto
 
 - **LinkedIn**: [Miguel Rodríguez](https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/)

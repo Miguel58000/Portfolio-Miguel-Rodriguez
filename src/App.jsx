@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { translations } from './data/translations';
 import { projectsData } from './data/projects';
 import { certificationsData } from './data/certifications';
@@ -6,7 +7,7 @@ import {
   FileDown, Moon, Sun, Languages, Github, ExternalLink, Code2, Server, Globe2, Briefcase,
   Database, ShieldCheck, BarChart, LayoutDashboard, Mail, Phone, MapPin, GraduationCap,
   Layers, Terminal, Cloud, CheckCircle2, Send, Cpu, PenTool, FileText, Activity, Building2, ChevronDown, ChevronUp,
-  Instagram, Linkedin, MessageSquare, ArrowUp, Youtube
+  Instagram, Linkedin, MessageSquare, ArrowUp, Youtube, Menu, X
 } from 'lucide-react';
 
 const MUNI_LOGO_URL = "/Logo.png";
@@ -17,6 +18,8 @@ function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [expandedProjects, setExpandedProjects] = useState({});
   const [expandedExperience, setExpandedExperience] = useState({});
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showCvModal, setShowCvModal] = useState(false);
 
   const toggleProject = (id) => {
     setExpandedProjects(prev => ({ ...prev, [id]: !prev[id] }));
@@ -58,29 +61,23 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer for scroll animations
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.1 });
 
-    const revealElements = document.querySelectorAll('.reveal');
-    revealElements.forEach(el => observer.observe(el));
-
-    return () => revealElements.forEach(el => observer.unobserve(el));
-  }, []);
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   const toggleLang = () => setLang(prev => prev === 'es' ? 'en' : 'es');
 
   const t = translations[lang];
 
-  // Dynamic CV link
-  const cvLink = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
+  // Dynamic CV download handler
+  const handleDownloadCv = () => {
+    const link = document.createElement('a');
+    link.href = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
+    link.download = `CV Miguel Rodríguez (${lang.toUpperCase()}).pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setShowCvModal(false);
+  };
 
   const skillCategories = [
     {
@@ -148,7 +145,8 @@ function App() {
         { name: "AutoCAD", icon: <PenTool size={14} /> },
         { name: "IT Support", icon: <Briefcase size={14} /> },
         { name: "Troubleshooting", icon: <Cpu size={14} /> },
-        { name: "Networks", icon: <Globe2 size={14} /> }
+        { name: "Networks", icon: <Globe2 size={14} /> },
+        { name: "AI & Prompts", icon: <Cpu size={14} /> }
       ]
     },
     {
@@ -189,23 +187,27 @@ function App() {
 
   return (
     <div className="app-container">
-      <nav>
+      <nav className={isMenuOpen ? 'menu-open' : ''}>
         <div className="nav-container">
-          <div className="nav-links">
-            <a href="#about" className={activeSection === 'about' ? 'active' : ''}>{t.nav.about}</a>
-            <a href="#education" className={activeSection === 'education' ? 'active' : ''}>{t.education.title}</a>
-            <a href="#experience" className={activeSection === 'experience' ? 'active' : ''}>{t.experience.title}</a>
-            <a href="#skills" className={activeSection === 'skills' ? 'active' : ''}>{t.skills.title}</a>
-            <a href="#certs" className={activeSection === 'certs' ? 'active' : ''}>{t.certifications.title}</a>
-            <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>{t.nav.projects}</a>
-            <div className="dropdown">
-              <a href="#" className="flex items-center gap-1"><FileDown size={18} /> CV</a>
-              <div className="dropdown-content">
-                <a href="/cv-es.pdf" download="CV Miguel Rodríguez (ES).pdf" className="dropdown-item"><FileDown size={16} /> Español</a>
-                <a href="/cv-en.pdf" download="CV Miguel Rodríguez (EN).pdf" className="dropdown-item"><FileDown size={16} /> English</a>
-              </div>
-            </div>
+          <div className="nav-logo">
+            <h2 className="gradient-text" style={{ margin: 0, fontSize: '1.5rem' }}>MIGUEL.DEV</h2>
           </div>
+
+          <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+            <a href="#about" onClick={() => setIsMenuOpen(false)} className={activeSection === 'about' ? 'active' : ''}>{t.nav.about}</a>
+            <a href="#education" onClick={() => setIsMenuOpen(false)} className={activeSection === 'education' ? 'active' : ''}>{t.education.title}</a>
+            <a href="#experience" onClick={() => setIsMenuOpen(false)} className={activeSection === 'experience' ? 'active' : ''}>{t.experience.title}</a>
+            <a href="#skills" onClick={() => setIsMenuOpen(false)} className={activeSection === 'skills' ? 'active' : ''}>{t.skills.title}</a>
+            <a href="#certs" onClick={() => setIsMenuOpen(false)} className={activeSection === 'certs' ? 'active' : ''}>{t.certifications.title}</a>
+            <a href="#projects" onClick={() => setIsMenuOpen(false)} className={activeSection === 'projects' ? 'active' : ''}>{t.nav.projects}</a>
+            <button
+              onClick={() => { setShowCvModal(true); setIsMenuOpen(false); }}
+              className="cv-nav-btn"
+            >
+              <FileDown size={18} /> CV
+            </button>
+          </div>
+
           <div className="nav-controls">
             <button className="icon-btn" onClick={toggleLang}>
               <Languages size={20} /> <span style={{ marginLeft: '5px' }}>{lang.toUpperCase()}</span>
@@ -213,26 +215,75 @@ function App() {
             <button className="icon-btn" onClick={toggleTheme}>
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+            <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </nav>
 
       <section id="hero" className="hero">
         <div className="container">
-          <div className="hero-content glass" style={{ borderRadius: '2.5rem' }}>
-            <span className="greeting">{t.hero.greeting}</span>
-            <h1 className="hero-title gradient-text">{t.hero.name}</h1>
-            <h2 className="hero-subtitle text-center">{t.hero.title}</h2>
-            <p className="hero-desc text-center">{t.about.summary}</p>
-            <div className="hero-actions">
+          <motion.div
+            className="hero-content glass"
+            style={{ borderRadius: '2.5rem' }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.span
+              className="greeting"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              {t.hero.greeting}
+            </motion.span>
+            <motion.h1
+              className="hero-title gradient-text"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              {t.hero.name}
+            </motion.h1>
+            <motion.h2
+              className="hero-subtitle text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              {t.hero.title}
+            </motion.h2>
+            <motion.p
+              className="hero-desc text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              {t.about.summary}
+            </motion.p>
+            <motion.div
+              className="hero-actions"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+            >
               <a href="#projects" className="btn btn-primary"><Briefcase size={20} /> {t.nav.projects}</a>
-              <a href={cvLink} download={`CV Miguel Rodríguez (${lang.toUpperCase()}).pdf`} className="btn btn-outline glass"><FileDown size={20} /> {t.contact.downloadThisCv}</a>
-            </div>
-          </div>
+              <button onClick={() => setShowCvModal(true)} className="btn btn-outline glass"><FileDown size={20} /> {t.contact.downloadThisCv}</button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      <section id="about" className="container reveal">
+      <motion.section
+        id="about"
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="section-title gradient-text">{t.about.title}</h2>
         <div className="about-grid">
           <div className="about-image">
@@ -270,38 +321,77 @@ function App() {
                   </div>
                   <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.englishDesc}</div>
                 </li>
+                <li>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
+                    <Cpu className="value-icon" />
+                    <span className="value-label">{t.about.aiLabel}</span>
+                  </div>
+                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.aiDesc}</div>
+                </li>
               </ul>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section id="education" className="container reveal">
+      <motion.section
+        id="education"
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="section-title gradient-text">{t.education.title}</h2>
         <div className="info-grid">
-          <div className="info-card glass">
+          <motion.div
+            className="info-card glass"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="info-header">
               <span className="info-role">{t.education.analista.degree}</span>
               <span className="info-period">{t.education.analista.period}</span>
             </div>
             <span className="info-company">{t.education.analista.school}</span>
             <p className="project-desc">{t.education.analista.status}</p>
-          </div>
-          <div className="info-card glass">
+          </motion.div>
+          <motion.div
+            className="info-card glass"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <div className="info-header">
               <span className="info-role">{t.education.ingenieria.degree}</span>
               <span className="info-period">{t.education.ingenieria.period}</span>
             </div>
             <span className="info-company">{t.education.ingenieria.school}</span>
             <p className="project-desc">{t.education.ingenieria.status}</p>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section id="experience" className="container reveal">
+      <motion.section
+        id="experience"
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="section-title gradient-text">{t.experience.title}</h2>
         <div className="info-grid">
-          <div className="info-card glass">
+          <motion.div
+            className="info-card glass"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="info-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <img src={MUNI_LOGO_URL} alt="Muni Rosario" className="muni-logo-img" loading="lazy" />
@@ -333,13 +423,19 @@ function App() {
             <div className="skill-items" style={{ marginTop: '1.5rem' }}>
               {['IT Support', 'Troubleshooting', 'Networks', 'Windows', 'Linux', 'Log Analysis', 'APIs'].map(tech => (
                 <div key={tech} className="mini-tech-tag">
-                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{width:14, height:14}} />}
+                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
                   {tech}
                 </div>
               ))}
             </div>
-          </div>
-          <div className="info-card glass">
+          </motion.div>
+          <motion.div
+            className="info-card glass"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <div className="info-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <img src={MUNI_LOGO_URL} alt="Muni Rosario" className="muni-logo-img" loading="lazy" />
@@ -371,39 +467,74 @@ function App() {
             <div className="skill-items" style={{ marginTop: '1.5rem' }}>
               {['Python', 'Pandas', 'NumPy', 'Frappe', 'SQL', 'Functional Analysis', 'Continuous Improvement', 'APIs'].map(tech => (
                 <div key={tech} className="mini-tech-tag">
-                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{width:14, height:14}} />}
+                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
                   {tech}
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section id="skills" className="container reveal">
+      <motion.section
+        id="skills"
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="section-title gradient-text">{t.skills.title}</h2>
         <div className="skills-container">
-          {skillCategories.map(cat => (
-            <div key={cat.id} className="skill-category-card glass">
+          {skillCategories.map((cat, idx) => (
+            <motion.div
+              key={cat.id}
+              className="skill-category-card glass"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ y: -5, borderColor: 'var(--accent-primary)' }}
+            >
               <h3 className="skill-category-title">{cat.icon} {cat.title}</h3>
               <div className="skill-items">
                 {cat.skills.map(s => (
-                  <div key={s.name} className="skill-tag">
+                  <motion.div
+                    key={s.name}
+                    className="skill-tag"
+                    whileHover={{ scale: 1.1 }}
+                  >
                     {s.src ? <img src={s.src} alt={s.name} className="skill-icon" /> : s.icon}
                     {s.name}
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section id="certs" className="container">
+      <motion.section
+        id="certs"
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="section-title gradient-text">{t.certifications.title}</h2>
         <div className="skills-container">
           {certificationsData.map((cat, idx) => (
-            <div key={idx} className="skill-category-card glass" style={{ height: 'auto' }}>
+            <motion.div
+              key={idx}
+              className="skill-category-card glass"
+              style={{ height: 'auto' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ y: -5, borderColor: 'var(--accent-primary)' }}
+            >
               <h3 className="skill-category-title">
                 {cat.category === 'Core & Languages' && <Globe2 size={22} />}
                 {cat.category === 'Cloud & Backend' && <Server size={22} />}
@@ -422,17 +553,32 @@ function App() {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section id="projects" className="container reveal">
+      <motion.section
+        id="projects"
+        className="container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="section-title gradient-text">{t.nav.projects}</h2>
         <h3 className="section-subtitle"><Briefcase size={28} /> {t.projects.group}</h3>
         <div className="projects-grid">
-          {projectsData.filter(p => p.type === 'group').map(project => (
-            <div key={project.id} className="project-card glass hover-highlight">
+          {projectsData.filter(p => p.type === 'group').map((project, idx) => (
+            <motion.div
+              key={project.id}
+              className="project-card glass hover-highlight"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ y: -10 }}
+            >
               <div className="project-img-wrapper">
                 {project.image ? (
                   <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
@@ -494,13 +640,21 @@ function App() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         <h3 className="section-subtitle"><Code2 size={28} /> {t.projects.individual}</h3>
         <div className="projects-grid">
-          {projectsData.filter(p => p.type === 'individual').map(project => (
-            <div key={project.id} className="project-card glass hover-highlight">
+          {projectsData.filter(p => p.type === 'individual').map((project, idx) => (
+            <motion.div
+              key={project.id}
+              className="project-card glass hover-highlight"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              whileHover={{ y: -10 }}
+            >
               <div className="project-img-wrapper">
                 {project.image ? (
                   <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
@@ -552,35 +706,89 @@ function App() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
 
-      <section id="contact" className="container reveal" style={{ paddingBottom: '10rem' }}>
+      <motion.section
+        id="contact"
+        className="container"
+        style={{ paddingBottom: '10rem' }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <h2 className="section-title gradient-text">{t.contact.title}</h2>
         <div className="info-grid" style={{ marginBottom: '4rem' }}>
-          <div className="info-card glass" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <motion.div
+            className="info-card glass"
+            style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -10 }}
+          >
             <div className="p-4 bg-blue-500/10 rounded-full text-blue-500"><MapPin size={32} /></div>
             <span className="info-company" style={{ marginBottom: 0 }}>{t.contact.location}</span>
-          </div>
-          <div className="info-card glass" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          </motion.div>
+          <motion.div
+            className="info-card glass"
+            style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            whileHover={{ y: -10 }}
+          >
             <div className="p-4 bg-green-500/10 rounded-full text-green-500"><Phone size={32} /></div>
             <span className="info-company" style={{ marginBottom: 0 }}>{t.contact.phone}</span>
-          </div>
-          <a href={`mailto:${t.contact.email}`} className="info-card glass" style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          </motion.div>
+          <motion.a
+            href={`mailto:${t.contact.email}`}
+            className="info-card glass"
+            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            whileHover={{ y: -10 }}
+          >
             <div className="p-4 bg-purple-500/10 rounded-full text-purple-500"><Mail size={32} /></div>
             <span className="info-company" style={{ marginBottom: 0 }}>{t.contact.email}</span>
-          </a>
-          <a href={t.contact.github} target="_blank" rel="noreferrer" className="info-card glass" style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          </motion.a>
+          <motion.a
+            href={t.contact.github}
+            target="_blank"
+            rel="noreferrer"
+            className="info-card glass"
+            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            whileHover={{ y: -10 }}
+          >
             <div className="p-4 bg-gray-500/10 rounded-full text-gray-500"><Github size={32} /></div>
             <span className="info-company" style={{ marginBottom: 0 }}>GitHub</span>
-          </a>
-          <a href="https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/" target="_blank" rel="noreferrer" className="info-card glass" style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          </motion.a>
+          <motion.a
+            href="https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/"
+            target="_blank"
+            rel="noreferrer"
+            className="info-card glass"
+            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            whileHover={{ y: -10 }}
+          >
             <div className="p-4 bg-blue-600/10 rounded-full text-blue-600"><Globe2 size={32} /></div>
             <span className="info-company" style={{ marginBottom: 0 }}>LinkedIn</span>
-          </a>
+          </motion.a>
         </div>
 
         <div className="glass p-8 mx-auto" style={{ borderRadius: '2.5rem', maxWidth: '900px', padding: '4rem', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
@@ -603,17 +811,22 @@ function App() {
             </button>
           </form>
         </div>
-      </section>
+      </motion.section>
 
       <footer className="footer-main">
         <div className="container">
           <div className="footer-grid">
-            <div className="footer-brand">
+            <motion.div
+              className="footer-brand"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <h2 className="gradient-text">MIGUEL.DEV</h2>
               <p className="footer-bio">
                 {lang === 'es'
-                  ? 'Ingeniero en Sistemas con enfoque en desarrollo robusto, ciberseguridad y análisis de datos. Especializado en transformar desafíos técnicos en soluciones escalables.'
-                  : 'Systems Engineer focused on robust development, cybersecurity, and data analysis. Specialized in transforming technical challenges into scalable solutions.'}
+                  ? 'Ingeniero en Sistemas de Información especializado en desarrollo backend, arquitecturas cloud y automatización. Transformando desafíos técnicos en soluciones escalables y confiables.'
+                  : 'Information Systems Engineer specializing in backend development, cloud architectures, and automation. Transforming technical challenges into scalable and reliable solutions.'}
               </p>
               <div className="footer-contact-item" style={{ border: 'none', padding: 0 }}>
                 <MapPin size={18} className="text-cyan-400" />
@@ -625,7 +838,7 @@ function App() {
                 <img src={getTechIcon('Python')} className="skill-icon" />
                 <img src={getTechIcon('MySQL')} className="skill-icon" />
               </div>
-            </div>
+            </motion.div>
 
             <div className="footer-nav">
               <span className="footer-col-title">{lang === 'es' ? 'Navegación' : 'Navigation'}</span>
@@ -649,10 +862,10 @@ function App() {
                 <Phone size={18} />
                 <span>{t.contact.phone}</span>
               </div>
-              <a href={cvLink} download className="footer-contact-item" style={{ color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' }}>
+              <button onClick={() => setShowCvModal(true)} className="footer-contact-item" style={{ color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)', background: 'none', width: '100%', cursor: 'pointer' }}>
                 <FileDown size={18} />
                 <span>{lang === 'es' ? 'Descargar CV' : 'Download CV'}</span>
-              </a>
+              </button>
             </div>
 
             <div className="footer-social">
@@ -676,10 +889,44 @@ function App() {
 
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.01. Última actualización: 23/04/2026</div>
+            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.10. Última actualización: 23/04/2026</div>
           </div>
         </div>
       </footer>
+      <AnimatePresence>
+        {showCvModal && (
+          <motion.div
+            className="modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowCvModal(false)}
+            style={{ zIndex: 100000 }}
+          >
+            <motion.div
+              className="modal-content glass"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FileDown size={48} className="modal-icon" />
+              <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
+              <p>
+                {lang === 'es'
+                  ? `Se descargará el CV de Miguel Rodríguez en Español (idioma actual del portfolio).`
+                  : `Miguel Rodríguez's CV will be downloaded in English (current portfolio language).`}
+              </p>
+              <div className="modal-actions">
+                <button className="btn btn-primary" onClick={handleDownloadCv}>OK</button>
+                <button className="btn btn-outline" onClick={() => setShowCvModal(false)}>
+                  {lang === 'es' ? 'Cancelar' : 'Cancel'}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
