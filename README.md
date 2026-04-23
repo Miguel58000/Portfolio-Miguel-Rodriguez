@@ -2,6 +2,8 @@
 
 Este es mi portafolio profesional, diseñado con una estética moderna y de alta tecnología. Está construido para mostrar mi experiencia como Ingeniero en Sistemas, mis proyectos y habilidades técnicas.
 
+## Preview
+
 ![Portfolio Preview](public/preview-portfolio.png)
 
 ## ✨ Características
