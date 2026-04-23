@@ -1,0 +1,48 @@
+# Miguel Rodríguez - Personal Portfolio 🚀
+
+Este es mi portafolio profesional, diseñado con una estética moderna y de alta tecnología. Está construido para mostrar mi experiencia como Ingeniero en Sistemas, mis proyectos y habilidades técnicas.
+
+![Portfolio Preview](public/preview-portfolio.png)
+
+## ✨ Características
+
+- **Diseño Moderno & Profesional**: Estética de alta tecnología con gradientes limpios, glassmorphism y efectos visuales avanzados.
+- **Responsive**: Totalmente adaptado para dispositivos móviles, tablets y escritorio.
+- **Sistema Multi-idioma**: Soporte completo para Español e Inglés.
+- **Modo Oscuro/Claro**: Selector de tema dinámico con persistencia.
+- **Animaciones Premium**: Reveal animations al hacer scroll y hovers interactivos.
+- **Secciones Detalladas**:
+  - Hero con resumen profesional.
+  - Educación con línea de tiempo.
+  - Experiencia Laboral con descripciones desplegables (accordion).
+  - Habilidades Técnicas con iconos dinámicos.
+  - Certificaciones organizadas por categoría.
+  - Proyectos con enlaces a repositorios (Frontend/Backend), demos en vivo y presentaciones en video.
+  - Formulario de contacto funcional.
+
+## 🛠️ Stack Tecnológico
+
+- **Frontend**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+- **Iconografía**: [Lucide React](https://lucide.dev/)
+- **Estilos**: Vanilla CSS3 (Variables, Grid, Flexbox, Animations)
+- **Despliegue**: Preparado para Vercel o Netlify.
+
+## 🚀 Instalación y Uso Local
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/Miguel58000/Portfolio-Miguel-Rodriguez.git
+3. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+4. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+## 📬 Contacto
+
+- **LinkedIn**: [Miguel Rodríguez](https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/)
+- **GitHub**: [@Miguel58000](https://github.com/Miguel58000)
+- **Email**: miguelrodriguezips36@gmail.com
