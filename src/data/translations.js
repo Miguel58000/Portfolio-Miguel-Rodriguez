@@ -148,7 +148,7 @@ export const translations = {
       title: "Professional Experience",
       heca: {
         role: "IT Support Intern",
-        company: "Hospital de Emergencias Dr. Clemente Álvarez",
+        company: "Dr. Clemente Álvarez Emergency Hospital",
         period: "May 2025 – Jan 2026",
         items: [
           "Technical support in Windows and Linux environments within critical healthcare infrastructure.",
@@ -160,7 +160,7 @@ export const translations = {
       },
       salud: {
         role: "Systems Intern",
-        company: "Secretaría de Salud Pública de Rosario",
+        company: "Public Health Secretary of Rosario",
         period: "Aug 2024 – May 2025",
         items: [
           "Functional analysis and validation of production applications.",

@@ -20,6 +20,9 @@ function App() {
   const [expandedExperience, setExpandedExperience] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showCvModal, setShowCvModal] = useState(false);
+  const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const toggleProject = (id) => {
     setExpandedProjects(prev => ({ ...prev, [id]: !prev[id] }));
@@ -77,6 +80,48 @@ function App() {
     link.click();
     document.body.removeChild(link);
     setShowCvModal(false);
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormState(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Usamos FormSubmit.co (es gratuito, no requiere cuenta y es muy sencillo)
+      const response = await fetch("https://formsubmit.co/ajax/miguelrodriguezips36@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          subject: formState.subject,
+          message: formState.message,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormState({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      // Ocultar el mensaje después de 5 segundos
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
   };
 
   const skillCategories = [
@@ -800,22 +845,91 @@ function App() {
 
         <div className="glass p-8 mx-auto" style={{ borderRadius: '2.5rem', maxWidth: '900px', padding: '4rem', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
           <h3 className="section-title gradient-text" style={{ fontSize: '2rem', marginBottom: '2rem' }}>{t.contact.subtitle}</h3>
-          <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <input type="text" className="form-input" placeholder={t.contact.formName} style={{ padding: '1.2rem' }} />
+              <input
+                type="text"
+                name="name"
+                className="form-input"
+                placeholder={t.contact.formName}
+                style={{ padding: '1.2rem' }}
+                value={formState.name}
+                onChange={handleFormChange}
+                required
+              />
             </div>
             <div className="form-group">
-              <input type="text" className="form-input" placeholder={t.contact.formSubject} style={{ padding: '1.2rem' }} />
+              <input
+                type="text"
+                name="subject"
+                className="form-input"
+                placeholder={t.contact.formSubject}
+                style={{ padding: '1.2rem' }}
+                value={formState.subject}
+                onChange={handleFormChange}
+                required
+              />
             </div>
             <div className="form-group">
-              <input type="email" className="form-input" placeholder={t.contact.formEmail} style={{ padding: '1.2rem' }} />
+              <input
+                type="email"
+                name="email"
+                className="form-input"
+                placeholder={t.contact.formEmail}
+                style={{ padding: '1.2rem' }}
+                value={formState.email}
+                onChange={handleFormChange}
+                required
+              />
             </div>
             <div className="form-group">
-              <textarea className="form-textarea" placeholder={t.contact.formMessage} style={{ padding: '1.2rem' }}></textarea>
+              <textarea
+                name="message"
+                className="form-textarea"
+                placeholder={t.contact.formMessage}
+                style={{ padding: '1.2rem' }}
+                value={formState.message}
+                onChange={handleFormChange}
+                required
+              ></textarea>
             </div>
-            <button type="submit" className="btn btn-primary" style={{ marginTop: '1.5rem', width: '100%', padding: '1.2rem', justifyContent: 'center', fontSize: '1.1rem' }}>
-              <Send size={20} /> {t.contact.formSend}
+            <button
+              type="submit"
+              className={`btn btn-primary ${isSubmitting ? 'loading' : ''}`}
+              disabled={isSubmitting}
+              style={{ marginTop: '1.5rem', width: '100%', padding: '1.2rem', justifyContent: 'center', fontSize: '1.1rem' }}
+            >
+              {isSubmitting ? (
+                <span>{lang === 'es' ? 'Enviando...' : 'Sending...'}</span>
+              ) : (
+                <>
+                  <Send size={20} /> {t.contact.formSend}
+                </>
+              )}
             </button>
+
+            <AnimatePresence>
+              {submitStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  style={{ color: '#10b981', marginTop: '1rem', textAlign: 'center', fontWeight: 500 }}
+                >
+                  {lang === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!'}
+                </motion.div>
+              )}
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  style={{ color: '#ef4444', marginTop: '1rem', textAlign: 'center', fontWeight: 500 }}
+                >
+                  {lang === 'es' ? 'Hubo un error. Inténtalo de nuevo.' : 'Something went wrong. Please try again.'}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </form>
         </div>
       </motion.section>
@@ -896,7 +1010,7 @@ function App() {
 
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.12. Última actualización: 23/04/2026</div>
+            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.13. Última actualización: 24/04/2026</div>
           </div>
         </div>
       </footer>

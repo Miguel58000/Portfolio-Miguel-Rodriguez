@@ -46,6 +46,10 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.13 (24/04/2026)**: 
+  - **Formulario de Contacto Funcional**: Integración con FormSubmit.co para recepción de mensajes vía email sin backend.
+  - **Traducciones de Experiencia**: Localización al inglés de los nombres de instituciones en la sección de Experiencia Profesional.
+  - **Feedback Dinámico**: Implementación de estados de carga (sending) y mensajes de éxito/error en el formulario.
 - **v1.12 (23/04/2026)**: 
   - Optimización y detallado avanzado de arquitecturas técnicas en proyectos clave (Next.js, Prisma, MikroORM, MongoDB).
   - Mejora de descripciones para resaltar el valor técnico y profesional de cada proyecto.
