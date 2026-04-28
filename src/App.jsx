@@ -72,10 +72,11 @@ function App() {
   const t = translations[lang];
 
   // Dynamic CV download handler
-  const handleDownloadCv = () => {
+  const handleDownloadCv = (downloadLang) => {
+    const targetLang = downloadLang || lang;
     const link = document.createElement('a');
-    link.href = lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf';
-    link.download = `CV Miguel Rodríguez (${lang.toUpperCase()}).pdf`;
+    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.16-${Date.now()}` : `/cv-en.pdf?v=1.16-${Date.now()}`;
+    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.16.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -165,7 +166,9 @@ function App() {
         { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
         { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
         { name: "Tailwind", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+        { name: "Material UI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg" },
         { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
+        { name: "React Router", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg" },
         { name: "Axure", icon: <PenTool size={14} /> },
         { name: "Marvel", icon: <PenTool size={14} /> },
         { name: "Framer Motion", icon: <Activity size={14} /> },
@@ -232,6 +235,11 @@ function App() {
       'Express': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
       'Linux': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
       'C#': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg",
+      'Material UI': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg",
+      'React Router': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg",
+      'PostgreSQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+      'Prisma': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
+      'MongoDB': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
     };
     return icons[tech] || null;
   };
@@ -633,12 +641,15 @@ function App() {
             >
               <div className="project-img-wrapper">
                 {project.image ? (
-                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    loading="lazy"
+                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                 ) : (
                   <div className="project-img-placeholder">
                     <Code2 size={48} />
                   </div>
                 )}
+                <div className="project-img-placeholder" style={{ display: 'none' }}><Code2 size={48} /></div>
               </div>
               <div className="project-info">
                 <div className="project-header-side" style={{ justifyContent: 'center', width: '100%' }}>
@@ -709,12 +720,15 @@ function App() {
             >
               <div className="project-img-wrapper">
                 {project.image ? (
-                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    loading="lazy"
+                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                 ) : (
                   <div className="project-img-placeholder">
                     <Code2 size={48} />
                   </div>
                 )}
+                <div className="project-img-placeholder" style={{ display: 'none' }}><Code2 size={48} /></div>
               </div>
               <div className="project-info">
                 <div className="project-header-side" style={{ justifyContent: 'center', width: '100%' }}>
@@ -1010,7 +1024,7 @@ function App() {
 
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.13. Última actualización: 24/04/2026</div>
+            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.16. Última actualización: 28/04/2026</div>
           </div>
         </div>
       </footer>
@@ -1035,13 +1049,18 @@ function App() {
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
               <p>
                 {lang === 'es'
-                  ? `Se descargará el CV de Miguel Rodríguez en Español (idioma actual del portfolio).`
-                  : `Miguel Rodríguez's CV will be downloaded in English (current portfolio language).`}
+                  ? 'Selecciona la versión del CV que deseas descargar (v1.16):'
+                  : 'Select the CV version you wish to download (v1.16):'}
               </p>
-              <div className="modal-actions">
-                <button className="btn btn-primary" onClick={handleDownloadCv}>OK</button>
-                <button className="btn btn-outline" onClick={() => setShowCvModal(false)}>
-                  {lang === 'es' ? 'Cancelar' : 'Cancel'}
+              <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
+                <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>
+                  {t.about.downloadCvSpanish}
+                </button>
+                <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('en')}>
+                  {t.about.downloadCvEnglish}
+                </button>
+                <button className="btn btn-outline" style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }} onClick={() => setShowCvModal(false)}>
+                  {lang === 'es' ? 'Cerrar' : 'Close'}
                 </button>
               </div>
             </motion.div>

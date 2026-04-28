@@ -25,8 +25,10 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ## Stack Tecnológico
 
-- **Frontend**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
-- **Iconografía**: [Lucide React](https://lucide.dev/)
+- **Frontend**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **UI & Routing**: [Material UI](https://mui.com/) + [React Router](https://reactrouter.com/)
+- **Iconografía**: [Lucide React](https://lucide.dev/) + [Devicons](https://devicon.dev/)
+- **Animaciones**: [Framer Motion](https://www.framer.com/motion/)
 - **Estilos**: Vanilla CSS3 (Variables, Grid, Flexbox, Animations)
 - **Despliegue**: Preparado para Vercel o Netlify.
 
@@ -46,6 +48,20 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.16 (28/04/2026)**:
+  - 🚀 **Ultra-Cache-Buster**: Implementamos un sistema de timestamps dinámicos. Olvídate de las versiones viejas; ahora siempre obtienes el CV v1.16 más reciente directo de la fuente.
+  - 💎 **Visual Polish**: Iconografía expandida (PostgreSQL, MongoDB, Prisma) y assets normalizados para un look impecable en cualquier dispositivo.
+  - 🛠️ **Project Spotlight**: Help Desk Pro totalmente integrado con descripciones optimizadas para una simetría perfecta en la grid.
+  - 📂 **Dual-CV Experience**: El modal ahora es inteligente y te permite elegir el idioma del documento sin rodeos.
+- **v1.15 (28/04/2026)**:
+  - **CV Download Refactor**: El modal ahora permite elegir entre descargar el CV en Español o Inglés de forma independiente.
+  - **Cache Busting**: Implementación de timestamp dinámico en las URLs de descarga para asegurar la obtención de los archivos más recientes.
+  - **Actualización de Archivos**: Vinculación de los nuevos documentos CV v1.15.
+- **v1.14 (28/04/2026)**: 
+  - **Nuevo Proyecto**: Integración de Help Desk Pro (Sistema de gestión de tickets).
+  - **Skills Update**: Adición de Material UI y React Router al stack técnico y mapeo dinámico de iconos.
+  - **Estabilidad**: Implementación de manejador de errores en imágenes (fallback) y normalización de assets para evitar problemas de case-sensitivity en servidores Linux.
+  - **CV Update**: Actualización de los archivos CV (Español/Inglés) con el nuevo proyecto y stack tecnológico v1.14.
 - **v1.13 (24/04/2026)**: 
   - **Formulario de Contacto Funcional**: Integración con FormSubmit.co para recepción de mensajes vía email sin backend.
   - **Traducciones de Experiencia**: Localización al inglés de los nombres de instituciones en la sección de Experiencia Profesional.

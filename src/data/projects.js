@@ -44,5 +44,16 @@ export const projectsData = [
     liveUrl: null,
     repoUrl: 'https://github.com/Miguel58000/nimble-challenge',
     image: '/nimble.png',
-  }
+  },
+  {
+    id: 'help-desk',
+    title: 'Help Desk Pro',
+    type: 'individual',
+    description: 'Gestión de tickets de soporte técnico con prioridades y seguimiento de incidencias IT.',
+    enDescription: 'Technical support ticket management with priorities and IT incident tracking.',
+    techs: ['React', 'TypeScript', 'Material UI', 'React Router', 'Vite'],
+    liveUrl: 'https://help-desk-pro-eight.vercel.app/',
+    repoUrl: 'https://github.com/Miguel58000/Help-Desk-Pro',
+    image: '/helpdeskpro.png',
+  },
 ];
