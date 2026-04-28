@@ -1049,8 +1049,8 @@ function App() {
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
               <p>
                 {lang === 'es'
-                  ? 'Selecciona la versión del CV que deseas descargar (v1.16):'
-                  : 'Select the CV version you wish to download (v1.16):'}
+                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.16):'
+                  : 'Select in which language you wish to download the CV (v1.16):'}
               </p>
               <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
                 <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>
