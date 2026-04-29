@@ -171,7 +171,8 @@ function App() {
         { name: "React Router", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg" },
         { name: "Axure", icon: <PenTool size={14} /> },
         { name: "Marvel", icon: <PenTool size={14} /> },
-        { name: "Framer Motion", icon: <Activity size={14} /> },
+        { name: "Vanilla CSS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+        { name: "Framer Motion", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg" },
         { name: "Recharts", icon: <Activity size={14} /> }
       ]
     },
@@ -199,7 +200,8 @@ function App() {
         { name: "IT Support", icon: <Briefcase size={14} /> },
         { name: "Troubleshooting", icon: <Cpu size={14} /> },
         { name: "Networks", icon: <Globe2 size={14} /> },
-        { name: "AI & Prompts", icon: <Cpu size={14} /> }
+        { name: "AI & Prompts", icon: <Cpu size={14} /> },
+        { name: "i18n (Internationalization)", icon: <Languages size={14} /> }
       ]
     },
     {
@@ -217,7 +219,8 @@ function App() {
         { name: "Pandas", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" },
         { name: "NumPy", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" },
         { name: "Continuous Improvement", icon: <Activity size={14} /> },
-        { name: "Vite", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" }
+        { name: "Vite", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" },
+        { name: "localStorage", icon: <Database size={14} /> }
       ]
     }
   ];
@@ -240,6 +243,8 @@ function App() {
       'PostgreSQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
       'Prisma': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
       'MongoDB': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+      'Vanilla CSS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
+      'Framer Motion': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
     };
     return icons[tech] || null;
   };

@@ -56,4 +56,15 @@ export const projectsData = [
     repoUrl: 'https://github.com/Miguel58000/Help-Desk-Pro',
     image: '/helpdeskpro.png',
   },
+  {
+    id: 'balances',
+    title: 'Balances',
+    type: 'individual',
+    description: 'Gestión financiera personal con estética Glassmorphism, gráficos interactivos y soporte multilingüe.',
+    enDescription: 'Personal finance management with Glassmorphism aesthetics, interactive charts, and multilingual support.',
+    techs: ['React', 'Vite', 'Vanilla CSS', 'Framer Motion', 'Recharts'],
+    liveUrl: 'https://balances-ten.vercel.app/',
+    repoUrl: 'https://github.com/Miguel58000/Balances',
+    image: '/balances.png',
+  },
 ];

@@ -48,6 +48,9 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.17 (29/04/2026)**:
+  - 💰 **Fintech Project**: Integración de **Balances**, una plataforma de finanzas personales con estética Glassmorphism y sistema de internacionalización (i18n) en español/inglés integrado, además de la posibilidad de alternar entre modo claro y modo oscuro.
+  - 🛠️ **Skills Expansion**: Adición de Vanilla CSS, Framer Motion (con iconos), i18n y localStorage al stack global de habilidades.
 - **v1.16 (28/04/2026)**:
   - 🚀 **Ultra-Cache-Buster**: Implementamos un sistema de timestamps dinámicos. Olvídate de las versiones viejas; ahora siempre obtienes el CV v1.16 más reciente directo de la fuente.
   - 💎 **Visual Polish**: Iconografía expandida (PostgreSQL, MongoDB, Prisma) y assets normalizados para un look impecable en cualquier dispositivo.
