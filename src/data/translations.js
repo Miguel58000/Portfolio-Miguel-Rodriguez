@@ -9,8 +9,8 @@ export const translations = {
     hero: {
       greeting: "Hola, soy",
       name: "Miguel Rodríguez",
-      title: "Ingeniero en Sistemas de Información | Backend & Cloud | Salesforce Double Star Ranger",
-      subtitle: "Construyendo servicios backend robustos, arquitecturas escalables orientadas a la confiabilidad y experiencias inolvidables.",
+      title: "Software Engineer | Systems Analyst | Backend & Cloud | AI & Data Engineering | Salesforce Double Star Ranger",
+      subtitle: "Construyendo servicios backend robustos, arquitecturas escalables orientadas a la confiabilidad y soluciones impulsadas por IA.",
     },
     about: {
       title: "Sobre Mí",
@@ -26,8 +26,8 @@ export const translations = {
       salesforceDesc: "Double Star Ranger con experiencia en automatización declarativa y flujos de trabajo en CRM.",
       englishLabel: "Comunicación Internacional:",
       englishDesc: "Nivel de inglés C2 Proficiency (Cambridge).",
-      aiLabel: "Desarrollo con IA:",
-      aiDesc: "Experto en el uso de herramientas de IA y Prompt Engineering para acelerar el ciclo de desarrollo y optimizar la calidad del código.",
+      aiLabel: "AI & Data Engineering:",
+      aiDesc: "Experto en el desarrollo de Agentes de IA, LLMs y análisis de datos avanzado con Databricks y Python.",
       downloadCvSpanish: "Descargar CV (Español)",
       downloadCvEnglish: "Descargar CV (Inglés)",
     },
@@ -122,8 +122,8 @@ export const translations = {
     hero: {
       greeting: "Hi, I'm",
       name: "Miguel Rodríguez",
-      title: "Software Engineer | Backend & Cloud | Salesforce Double Star Ranger",
-      subtitle: "Building resilient backend services, scalable cloud-native architectures, and unforgettable experiences.",
+      title: "Software Engineer | Systems Analyst | Backend & Cloud | AI & Data Engineering | Salesforce Double Star Ranger",
+      subtitle: "Building resilient backend services, scalable cloud-native architectures, and AI-driven solutions.",
     },
     about: {
       title: "About Me",
@@ -139,8 +139,8 @@ export const translations = {
       salesforceDesc: "Double Star Ranger with expertise in declarative automation and CRM workflows.",
       englishLabel: "Global Ready:",
       englishDesc: "Certified C2 Proficiency (Cambridge) English speaker.",
-      aiLabel: "AI-Powered Development:",
-      aiDesc: "Expert in leveraging AI tools and Prompt Engineering to accelerate the development lifecycle and optimize code quality.",
+      aiLabel: "AI & Data Engineering:",
+      aiDesc: "Expert in developing AI Agents, LLMs, and advanced data analytics with Databricks and Python.",
       downloadCvSpanish: "Download CV (Spanish)",
       downloadCvEnglish: "Download CV (English)",
     },

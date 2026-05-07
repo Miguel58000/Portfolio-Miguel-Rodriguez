@@ -183,6 +183,7 @@ function App() {
       skills: [
         { name: "Docker", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
         { name: "OCI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
+        { name: "Databricks", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/databricks/databricks-original.svg" },
         { name: "Cypress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg" },
         { name: "Postman", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" }
       ]
@@ -200,7 +201,8 @@ function App() {
         { name: "IT Support", icon: <Briefcase size={14} /> },
         { name: "Troubleshooting", icon: <Cpu size={14} /> },
         { name: "Networks", icon: <Globe2 size={14} /> },
-        { name: "AI & Prompts", icon: <Cpu size={14} /> },
+        { name: "AI Agents & LLMs", icon: <Cpu size={14} /> },
+        { name: "Prompt Engineering", icon: <Cpu size={14} /> },
         { name: "i18n (Internationalization)", icon: <Languages size={14} /> }
       ]
     },
@@ -211,6 +213,7 @@ function App() {
       skills: [
         { name: "Microsoft 365", icon: <Layers size={14} /> },
         { name: "Excel", icon: <Briefcase size={14} /> },
+        { name: "Power BI", icon: <BarChart size={14} /> },
         { name: "LaTeX", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/latex/latex-original.svg" },
         { name: "Git", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
         { name: "GitHub", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
@@ -603,7 +606,7 @@ function App() {
               <h3 className="skill-category-title">
                 {cat.category === 'Core & Languages' && <Globe2 size={22} />}
                 {cat.category === 'Cloud & Backend' && <Server size={22} />}
-                {cat.category === 'Data Science & Python' && <BarChart size={22} />}
+                {cat.category === 'Data Science, AI & Python' && <BarChart size={22} />}
                 {cat.category === 'Frontend & Web Development' && <Layers size={22} />}
                 {cat.category === 'Agile & Soft Skills' && <ShieldCheck size={22} />}
                 {cat.category}
@@ -1029,7 +1032,7 @@ function App() {
 
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.16. Última actualización: 28/04/2026</div>
+            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.18. Última actualización: 07/05/2026</div>
           </div>
         </div>
       </footer>
@@ -1054,8 +1057,8 @@ function App() {
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
               <p>
                 {lang === 'es'
-                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.16):'
-                  : 'Select in which language you wish to download the CV (v1.16):'}
+                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.18):'
+                  : 'Select in which language you wish to download the CV (v1.18):'}
               </p>
               <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
                 <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>

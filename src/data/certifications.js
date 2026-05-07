@@ -16,11 +16,15 @@ export const certificationsData = [
     ]
   },
   {
-    category: 'Data Science & Python',
+    category: 'Data Science, AI & Python',
     certs: [
-      { id: 7, title: 'Domina el análisis de datos con Python!', issuer: 'Desafío Latam', year: '2025' },
-      { id: 8, title: 'Introducción a la Ciencia de Datos', issuer: 'Santander Open Academy', year: '2025' },
-      { id: 9, title: 'Power BI', issuer: 'Santander Open Academy', year: '2025' },
+      { id: 7, title: 'AI/BI for Data Analytics', issuer: 'Databricks', year: '2026' },
+      { id: 8, title: 'Knowledge Badge - Get Started with AI Agents on Databricks', issuer: 'Databricks', year: '2026' },
+      { id: 26, title: 'AI Agent Fundamentals', issuer: 'Databricks', year: '2026' },
+      { id: 27, title: 'Academy Accreditation - Databricks Fundamentals', issuer: 'Databricks', year: '2026' },
+      { id: 29, title: 'Domina el análisis de datos con Python!', issuer: 'Desafío Latam', year: '2025' },
+      { id: 30, title: 'Introducción a la Ciencia de Datos', issuer: 'Santander Open Academy', year: '2025' },
+      { id: 31, title: 'Power BI', issuer: 'Santander Open Academy', year: '2025' },
       { id: 10, title: 'Data Science Foundations', issuer: 'Great Learning', year: '2024' },
       { id: 11, title: 'Data Visualization With Power BI', issuer: 'Great Learning', year: '2024' },
       { id: 12, title: 'Course: NumPy', issuer: 'Ademass Training', year: '2023' },
@@ -36,7 +40,8 @@ export const certificationsData = [
       { id: 17, title: 'JavaScript (6+ Courses: DOM, APIs, Async)', issuer: 'Alura / Oracle', year: '2024' },
       { id: 18, title: 'HTML5 & CSS3 (Advanced Layouts & Responsive)', issuer: 'Alura / Oracle', year: '2024' },
       { id: 19, title: 'Intro to Web Development I & II', issuer: 'Google', year: '2019' },
-      { id: 20, title: 'UI/UX for Beginners', issuer: 'Great Learning', year: '2024' }
+      { id: 20, title: 'UI/UX for Beginners', issuer: 'Great Learning', year: '2024' },
+      { id: 32, title: 'Practicando React: Challenge Aluraflix', issuer: 'Oracle / Alura', year: '2024' }
     ]
   },
   {

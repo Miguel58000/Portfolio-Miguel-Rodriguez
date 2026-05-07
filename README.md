@@ -48,6 +48,12 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.18 (07/05/2026)**:
+  - 🤖 **AI & Data Engineering Focus**: Expansión integral del perfil hacia la Ingeniería de Datos e IA, integrando certificaciones avanzadas de **Databricks** (AI Agents, AI/BI, Fundamentals) y nuevas habilidades en LLMs.
+  - 🏗️ **Enterprise-Grade Projects**: Actualización profunda de **Help Desk Pro** (Multi-tenancy, Control de Stock corporativo) y **Balances** (Análisis de composición financiera v2.0).
+  - 🛠️ **Skills Overhaul**: Adición de **Power BI**, **Databricks**, **AI Agents** y **Prompt Engineering** al stack técnico global.
+  - 🎓 **Certs Update**: Integración de nuevas certificaciones de Databricks, Oracle y React Challenge.
+
 - **v1.17 (29/04/2026)**:
   - 💰 **Fintech Project**: Integración de **Balances**, una plataforma de finanzas personales con estética Glassmorphism y sistema de internacionalización (i18n) en español/inglés integrado, además de la posibilidad de alternar entre modo claro y modo oscuro.
   - 🛠️ **Skills Expansion**: Adición de Vanilla CSS, Framer Motion (con iconos), i18n y localStorage al stack global de habilidades.
