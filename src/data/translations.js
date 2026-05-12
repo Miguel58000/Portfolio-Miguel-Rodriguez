@@ -109,7 +109,8 @@ export const translations = {
       repo: "Repositorio",
     },
     footer: {
-      rights: "Todos los derechos reservados."
+      rights: "Todos los derechos reservados.",
+      version: "v1.19. Última actualización: 11/05/2026"
     }
   },
   en: {
@@ -222,7 +223,8 @@ export const translations = {
       repo: "Repository",
     },
     footer: {
-      rights: "All rights reserved."
+      rights: "All rights reserved.",
+      version: "v1.19. Last updated: 05/11/2026"
     }
   }
 };

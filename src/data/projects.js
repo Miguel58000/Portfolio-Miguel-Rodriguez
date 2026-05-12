@@ -67,4 +67,15 @@ export const projectsData = [
     repoUrl: 'https://github.com/Miguel58000/Balances',
     image: '/balances.png',
   },
+  {
+    id: 'jobquest',
+    title: 'JobQuest - Job Application Tracker',
+    type: 'individual',
+    description: 'Panel visual para gestionar tu búsqueda de empleo. Monitorea postulaciones, entrevistas, ofertas y rechazos en un solo lugar.',
+    enDescription: 'Visual dashboard to track your job search journey. Monitor applications, interviews, offers, and rejections in one place.',
+    techs: ['Angular 21', 'TypeScript', 'RxJS', 'Firebase Auth', 'Cloud Firestore', 'Lucide Icons', 'Vercel'],
+    liveUrl: null,
+    repoUrl: null,
+    image: '/JobQuest.png',
+  },
 ];

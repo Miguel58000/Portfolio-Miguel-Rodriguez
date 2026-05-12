@@ -20,7 +20,7 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
   - Experiencia Laboral con descripciones desplegables (accordion).
   - Habilidades Técnicas con iconos dinámicos.
   - Certificaciones organizadas por categoría.
-  - Proyectos con enlaces a repositorios (Frontend/Backend), demos en vivo y presentaciones en video.
+  - Proyectos con enlaces a repositorios (Frontend/Backend), demas en vivo y presentaciones en video.
   - Formulario de contacto funcional.
 
 ## Stack Tecnológico
@@ -37,7 +37,7 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/Miguel58000/Portfolio-Miguel-Rodriguez.git
-3. Instala las dependencias:
+   3. Instala las dependencias:
    ```bash
    npm install
    ```
@@ -47,6 +47,11 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
    ```
 
 ##  Historial de Versiones (Changelog)
+
+- **v1.19 (11/05/2026)**:
+  - 📋 **JobQuest Integration**: Agregado JobQuest - Job Application Tracker, aplicación serverless completa con Angular 21, Firebase Auth, Cloud Firestore, RxJS y soporte multi-idioma.
+  - 🎨 **Skills Update**: Añadidos Angular, RxJS, Firebase (Auth/Firestore) y Vercel al stack de habilidades técnicas.
+  - 📊 **Project Count**: Portafolio ahora muestra 7 proyectos (2 grupales + 5 individuales).
 
 - **v1.18 (07/05/2026)**:
   - 🤖 **AI & Data Engineering Focus**: Expansión integral del perfil hacia la Ingeniería de Datos e IA, integrando certificaciones avanzadas de **Databricks** (AI Agents, AI/BI, Fundamentals) y nuevas habilidades en LLMs.

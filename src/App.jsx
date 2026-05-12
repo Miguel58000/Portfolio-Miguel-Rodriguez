@@ -165,6 +165,7 @@ function App() {
       skills: [
         { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
         { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+        { name: "Angular", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" },
         { name: "Tailwind", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
         { name: "Material UI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg" },
         { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
@@ -173,7 +174,9 @@ function App() {
         { name: "Marvel", icon: <PenTool size={14} /> },
         { name: "Vanilla CSS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
         { name: "Framer Motion", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg" },
-        { name: "Recharts", icon: <Activity size={14} /> }
+        { name: "Recharts", icon: <Activity size={14} /> },
+        { name: "RxJS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rxjs/rxjs-original.svg" },
+        { name: "Lucide Icons", icon: <Layers size={14} /> }
       ]
     },
     {
@@ -185,7 +188,9 @@ function App() {
         { name: "OCI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
         { name: "Databricks", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/databricks/databricks-original.svg" },
         { name: "Cypress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg" },
-        { name: "Postman", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" }
+        { name: "Postman", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
+        { name: "Firebase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
+        { name: "Vercel", icon: <Cloud size={14} /> }
       ]
     },
     {
@@ -248,6 +253,11 @@ function App() {
       'MongoDB': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
       'Vanilla CSS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
       'Framer Motion': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
+      'Angular': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg",
+      'RxJS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rxjs/rxjs-original.svg",
+      'Firebase': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
+      'Lucide Icons': null,
+      'Vercel': null
     };
     return icons[tech] || null;
   };
@@ -1030,10 +1040,10 @@ function App() {
             </div>
           </div>
 
-          <div className="footer-bottom">
-            <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>v1.18. Última actualización: 07/05/2026</div>
-          </div>
+           <div className="footer-bottom">
+             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
+             <div style={{ opacity: 0.7, letterSpacing: '1px' }}>{t.footer.version}</div>
+           </div>
         </div>
       </footer>
       <AnimatePresence>
