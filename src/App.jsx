@@ -75,8 +75,8 @@ function App() {
   const handleDownloadCv = (downloadLang) => {
     const targetLang = downloadLang || lang;
     const link = document.createElement('a');
-    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.16-${Date.now()}` : `/cv-en.pdf?v=1.16-${Date.now()}`;
-    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.16.pdf`;
+    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.19-${Date.now()}` : `/cv-en.pdf?v=1.19-${Date.now()}`;
+    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.19.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1071,8 +1071,8 @@ function App() {
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
               <p>
                 {lang === 'es'
-                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.18):'
-                  : 'Select in which language you wish to download the CV (v1.18):'}
+                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.19):'
+                  : 'Select in which language you wish to download the CV (v1.19):'}
               </p>
               <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
                 <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>
