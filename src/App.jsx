@@ -75,8 +75,8 @@ function App() {
   const handleDownloadCv = (downloadLang) => {
     const targetLang = downloadLang || lang;
     const link = document.createElement('a');
-    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.19-${Date.now()}` : `/cv-en.pdf?v=1.19-${Date.now()}`;
-    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.19.pdf`;
+    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.20-${Date.now()}` : `/cv-en.pdf?v=1.20-${Date.now()}`;
+    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.20.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1044,10 +1044,10 @@ function App() {
             </div>
           </div>
 
-           <div className="footer-bottom">
-             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-             <div style={{ opacity: 0.7, letterSpacing: '1px' }}>{t.footer.version}</div>
-           </div>
+          <div className="footer-bottom">
+            <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
+            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>{t.footer.version}</div>
+          </div>
         </div>
       </footer>
       <AnimatePresence>
@@ -1071,8 +1071,8 @@ function App() {
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
               <p>
                 {lang === 'es'
-                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.19):'
-                  : 'Select in which language you wish to download the CV (v1.19):'}
+                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.20):'
+                  : 'Select in which language you wish to download the CV (v1.20):'}
               </p>
               <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
                 <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>

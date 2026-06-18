@@ -110,7 +110,7 @@ export const translations = {
     },
     footer: {
       rights: "Todos los derechos reservados.",
-      version: "v1.19. Última actualización: 11/05/2026"
+      version: "v1.20. Última actualización: 15/05/2026"
     }
   },
   en: {
@@ -224,7 +224,7 @@ export const translations = {
     },
     footer: {
       rights: "All rights reserved.",
-      version: "v1.19. Last updated: 05/11/2026"
+      version: "v1.20. Last updated: 05/15/2026"
     }
   }
 };

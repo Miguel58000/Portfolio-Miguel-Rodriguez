@@ -48,6 +48,10 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.20 (15/05/2026)**:
+  - 🎓 **Certs Expansion**: Incorporación de 4 nuevas certificaciones estratégicas: IA en Reclutamiento y Desarrollo (Renaiss), Evolución de la IA (FAGDUT) y Cloud/Agile (Globant).
+  - 🚀 **Maintenance**: Actualización de links de descarga y versión global del sistema.
+
 - **v1.19 (11/05/2026)**:
   - 📋 **JobQuest Integration**: Agregado JobQuest - Job Application Tracker, aplicación serverless completa con Angular 21, Firebase Auth, Cloud Firestore, RxJS y soporte multi-idioma.
   - 🎨 **Skills Update**: Añadidos Angular, RxJS, Firebase (Auth/Firestore) y Vercel al stack de habilidades técnicas.

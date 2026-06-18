@@ -22,6 +22,9 @@ export const certificationsData = [
       { id: 8, title: 'Knowledge Badge - Get Started with AI Agents on Databricks', issuer: 'Databricks', year: '2026' },
       { id: 26, title: 'AI Agent Fundamentals', issuer: 'Databricks', year: '2026' },
       { id: 27, title: 'Academy Accreditation - Databricks Fundamentals', issuer: 'Databricks', year: '2026' },
+      { id: 33, title: 'Habilidades Clave en la Era del Reclutamiento con IA', issuer: 'Renaiss', year: '2026' },
+      { id: 34, title: 'Desarrollar Tecnología en Tiempos de IA', issuer: 'Renaiss', year: '2026' },
+      { id: 36, title: 'Fundamentos y Evolución de la IA: del Procesamiento Simbólico al Aprendizaje Profundo', issuer: 'CAIMI y Instituto de Capacitación de FAGDUT', year: '2026' },
       { id: 29, title: 'Domina el análisis de datos con Python!', issuer: 'Desafío Latam', year: '2025' },
       { id: 30, title: 'Introducción a la Ciencia de Datos', issuer: 'Santander Open Academy', year: '2025' },
       { id: 31, title: 'Power BI', issuer: 'Santander Open Academy', year: '2025' },
@@ -51,7 +54,8 @@ export const certificationsData = [
       { id: 22, title: 'Fundamentos de agilidad', issuer: 'Oracle', year: '2024' },
       { id: 23, title: 'Propósito profesional & Gestión de carrera', issuer: 'Oracle', year: '2024' },
       { id: 24, title: 'Ponencia Ciberseguridad Integral y Hacking Ético', issuer: 'UTN Mendoza', year: '2025' },
-      { id: 25, title: 'Git y GitHub', issuer: 'Oracle', year: '2024' }
+      { id: 25, title: 'Git y GitHub', issuer: 'Oracle', year: '2024' },
+      { id: 35, title: 'Cloud, Diseño de Producto Digital y Metodologías Ágiles', issuer: 'Globant', year: '2026' }
     ]
   }
 ];
