@@ -48,6 +48,10 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 
 ##  Historial de Versiones (Changelog)
 
+- **v1.21 (27/06/2026)**:
+  - 🏋️‍♂️ **LiftLab Integration**: Agregado LiftLab, una aplicación avanzada para diseñar, analizar y trackear entrenamientos construida con Next.js 16, TypeScript, Zustand, Recharts y Firebase.
+  - 🚀 **Maintenance**: Actualización de versión global a v1.21 y adición del proyecto al sector de aplicaciones individuales del portafolio.
+
 - **v1.20 (15/05/2026)**:
   - 🎓 **Certs Expansion**: Incorporación de 4 nuevas certificaciones estratégicas: IA en Reclutamiento y Desarrollo (Renaiss), Evolución de la IA (FAGDUT) y Cloud/Agile (Globant).
   - 🚀 **Maintenance**: Actualización de links de descarga y versión global del sistema.

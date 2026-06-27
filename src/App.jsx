@@ -75,8 +75,8 @@ function App() {
   const handleDownloadCv = (downloadLang) => {
     const targetLang = downloadLang || lang;
     const link = document.createElement('a');
-    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.20-${Date.now()}` : `/cv-en.pdf?v=1.20-${Date.now()}`;
-    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.20.pdf`;
+    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.21-${Date.now()}` : `/cv-en.pdf?v=1.21-${Date.now()}`;
+    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.21.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -167,6 +167,7 @@ function App() {
         { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
         { name: "Angular", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" },
         { name: "Tailwind", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+        { name: "Zustand", icon: <Layers size={14} /> },
         { name: "Material UI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg" },
         { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
         { name: "React Router", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg" },
@@ -237,6 +238,7 @@ function App() {
 
   const getTechIcon = (tech) => {
     const icons = {
+      'Next.js 16': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
       'React': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
       'Node.js': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
       'TypeScript': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
@@ -1071,8 +1073,8 @@ function App() {
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
               <p>
                 {lang === 'es'
-                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.20):'
-                  : 'Select in which language you wish to download the CV (v1.20):'}
+                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.21):'
+                  : 'Select in which language you wish to download the CV (v1.21):'}
               </p>
               <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
                 <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>

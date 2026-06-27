@@ -78,4 +78,15 @@ export const projectsData = [
     repoUrl: 'https://github.com/Miguel58000/JobQuest',
     image: '/JobQuest.png',
   },
+  {
+    id: 'liftlab',
+    title: 'LiftLab',
+    type: 'individual',
+    description: 'Aplicación web avanzada para diseñar, analizar y trackear entrenamientos. Incluye constructor de rutinas personalizado, registro interactivo en vivo (con series de aproximación y repeticiones parciales), temporizador inteligente, dashboard de volumen y fatiga muscular, y calculadora nutricional.',
+    enDescription: 'Advanced web application to design, analyze, and track workouts. Features a custom routine builder, live interactive tracker (supporting warm-up sets and partial reps), smart rest timer, volume/fatigue analysis dashboard, and integrated nutritional calculator.',
+    techs: ['Next.js 16', 'TypeScript', 'Zustand', 'Recharts', 'Firebase Auth', 'Cloud Firestore', 'Tailwind CSS'],
+    liveUrl: 'https://lift-lab-ixo9.vercel.app/',
+    repoUrl: 'https://github.com/Miguel58000/LiftLab',
+    image: '/LiftLab.png',
+  },
 ];
