@@ -1,4 +1,4 @@
-# Miguel Rodríguez - Portfolio
+# Miguel Rodríguez - Personal Portfolio
 
 🌐 **Language / Idioma:** [English](#english) · [Español](#español)
 
