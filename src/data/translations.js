@@ -284,7 +284,7 @@ export const translations = {
     footer: {
       bio: "Information Systems Analyst | Data & AI | Software. Specialized in exploratory data analysis, machine learning, and incident diagnosis in high-availability environments.",
       rights: "All rights reserved.",
-      version: "v1.23 — Updated October 7, 2026"
+      version: "v1.21. Last updated: 06/27/2026"
     }
   }
 };
