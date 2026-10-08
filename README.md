@@ -1,131 +1,252 @@
-# Miguel Rodríguez - Personal Portfolio 
+# Miguel Rodríguez - Portfolio
 
-Este es mi portafolio profesional, diseñado con una estética moderna y de alta tecnología. Está construido para mostrar mi experiencia como Ingeniero en Sistemas, mis proyectos y habilidades técnicas.
+🌐 **Language / Idioma:** [English](#english) · [Español](#español)
 
-## Preview
+---
 
-![Portfolio Preview](public/preview-portfolio.png)
+<a id="english"></a>
 
-##  Características
+## 🇬🇧 English
 
-- **Diseño Moderno & Profesional**: Estética de alta tecnología con gradientes limpios, glassmorphism y efectos visuales avanzados.
-- **Responsive**: Totalmente adaptado para dispositivos móviles, tablets y escritorio.
-- **Sistema Multi-idioma**: Soporte completo para Español e Inglés.
-- **Modo Oscuro/Claro**: Selector de tema dinámico con persistencia.
-- **Animaciones Premium**: Reveal animations al hacer scroll y hovers interactivos usando Framer Motion.
-- **IA-Ready**: Sección dedicada a habilidades en Desarrollo utilizando IA y Prompt Engineering.
-- **Secciones Detalladas**:
-  - Hero con resumen profesional.
-  - Educación con línea de tiempo.
-  - Experiencia Laboral con descripciones desplegables (accordion).
-  - Habilidades Técnicas con iconos dinámicos.
-  - Certificaciones organizadas por categoría.
-  - Proyectos con enlaces a repositorios (Frontend/Backend), demos en vivo y presentaciones en video.
-  - Formulario de contacto funcional.
+A high-performance professional portfolio showcasing expertise as a Systems Engineer, technical projects, and professional capabilities. Built with modern design principles and an editorial, sidebar-driven layout.
 
-## Stack Tecnológico
+### Features
+
+- **Modern Editorial Layout**: Fixed sidebar navigation on desktop (collapsing into a top bar with a dropdown menu on mobile), a two-column hero with portrait, and clean row-based sections
+- **Fully Responsive**: Optimized for mobile, tablet, and desktop viewing
+- **Bilingual Interface**: Complete Spanish/English support
+- **Dynamic Theme System**: Smart dark/light mode with persistence
+- **Purposeful Motion**: A single hero entrance, animated modal and form feedback, and `prefers-reduced-motion` support
+- **AI-Ready Skills**: Dedicated section featuring AI development and prompt engineering capabilities
+- **Interactive Tech Stack**: Skills organized in category tabs with a tile panel per technology
+- **Comprehensive Sections**:
+  - Hero section with professional summary and portrait
+  - Educational background
+  - Work experience with expandable details
+  - Technical skills with dynamic icon system
+  - Organized certifications by category
+  - Featured projects with GitHub links, live demos, and presentations
+  - Functional contact form with a dedicated contact list
+
+### Technology Stack
 
 - **Frontend**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - **UI & Routing**: [Material UI](https://mui.com/) + [React Router](https://reactrouter.com/)
-- **Iconografía**: [Lucide React](https://lucide.dev/) + [Devicons](https://devicon.dev/)
-- **Animaciones**: [Framer Motion](https://www.framer.com/motion/)
-- **Estilos**: Vanilla CSS3 (Variables, Grid, Flexbox, Animations)
-- **Despliegue**: Preparado para Vercel o Netlify.
+- **Iconography**: [Lucide React](https://lucide.dev/) + [Devicons](https://devicon.dev/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Typography**: Bricolage Grotesque + Hanken Grotesk (Google Fonts)
+- **Styling**: Vanilla CSS3 with CSS variables, grid, flexbox, and animations
+- **Deployment**: Ready for Vercel or Netlify
 
-##  Instalación y Uso Local
+### Installation & Local Usage
 
-1. Clona el repositorio:
+1. Clone the repository:
    ```bash
    git clone https://github.com/Miguel58000/Portfolio-Miguel-Rodriguez.git
    ```
-2. Entra en la carpeta del repositorio:
+2. Navigate to the project directory:
    ```bash
    cd Portfolio-Miguel-Rodriguez
    ```
-3. Instala las dependencias:
+3. Install dependencies:
    ```bash
    npm install
    ```
-4. Inicia el servidor de desarrollo:
+4. Start development server:
    ```bash
    npm run dev
    ```
 
-##  Historial de Versiones (Changelog)
+### Version History
+
+- **v1.24 (08/10/2026)**:
+  - 🧱 **Structural Redesign**: New layout with fixed sidebar navigation (top bar with dropdown menu on mobile), two-column hero with portrait, row-based Experience / Skills / Certifications, horizontal project cards, and a split contact section (contact list + form)
+  - 🪪 **New Brand Mark**: Replaced the "MIGUEL.DEV" logo with an "MR" monogram next to the full name, in both the sidebar and the footer
+  - 🧰 **Tech Stack Redesign**: Skills now use category tabs with a tile panel for each technology, showing the number of items per category
+  - 🎨 **Visual Refresh**: New typography (Bricolage Grotesque + Hanken Grotesk), tighter radii, flatter surfaces and bold section headings, keeping the original color palette (indigo light mode, lime-on-black dark mode)
+  - 🧭 **Navigation**: Active section tracking now uses `IntersectionObserver` instead of a scroll listener
+  - 🎞️ **Motion**: Removed per-section scroll reveals; kept hero entrance, modal and form feedback; added `prefers-reduced-motion` support
+  - 📂 **CV Update**: CV download version label, filename and cache-buster updated to v1.24
+  - 🚀 **Maintenance**: Global version updated to v1.24
+
 - **v1.23 (07/10/2026)**:
-  - 🔬 **Research Experience**: Incorporación de la experiencia como Colaborador en Proyecto de Investigación (Ciencia de Datos) en la UTN, con su stack asociado (Python, Pandas, NumPy, Scikit-learn, EDA y Clustering).
-  - 🧭 **Profile Repositioning**: Nuevo título principal "Systems Analyst | Data & AI | Software" y resumen profesional actualizado.
-  - 🛠️ **Skills Update**: Incorporación de Tableau, KNIME, dbt, IBM SPSS Statistics/Modeler y Redes Neuronales / Deep Learning al stack de habilidades.
-  - 🔗 **Social**: Nuevo botón de Salesforce en redes sociales.
-  - 📂 **CV Update**: Actualización de los archivos CV en español e inglés.
-  - 🚀 **Maintenance**: Actualización de la versión global a v1.23 y de la fecha de última modificación.
+  - 🔬 **Research Experience**: Added Research Collaborator role at UTN Data Science project (Python, Pandas, NumPy, Scikit-learn, EDA, Clustering)
+  - 🧭 **Profile Repositioning**: New headline "Systems Analyst | Data & AI | Software" and updated professional summary
+  - 🛠️ **Skills Update**: Added Tableau, KNIME, dbt, IBM SPSS Statistics/Modeler, and Neural Networks/Deep Learning
+  - 🔗 **Social**: Added Salesforce button to social links
+  - 📂 **CV Update**: Updated Spanish/English CV files
+  - 🚀 **Maintenance**: Global version updated to v1.23
 
 - **v1.22 (25/08/2026)**:
-  - 📂 **CV Update**: Actualización de los archivos CV en español e inglés.
-  - 🚀 **Maintenance**: Actualización de la versión global del sistema y fecha de última modificación.
-
-- **v1.22 (25/08/2026)**:
-  - 📂 **CV Update**: Actualización de los archivos CV en español e inglés.
-  - 🚀 **Maintenance**: Actualización de la versión global del sistema y fecha de última modificación.
+  - 📂 **CV Update**: Updated Spanish/English CV files
+  - 🚀 **Maintenance**: System-wide version update and last modified date
 
 - **v1.21 (27/06/2026)**:
-  - 🏋️‍♂️ **LiftLab Integration**: Agregado LiftLab, una aplicación avanzada para diseñar, analizar y trackear entrenamientos construida con Next.js 16, TypeScript, Zustand, Recharts y Firebase.
-  - 🚀 **Maintenance**: Actualización de versión global a v1.21 y adición del proyecto al sector de aplicaciones individuales del portafolio.
+  - 🏋️‍♂️ **LiftLab Integration**: Added advanced workout management app (Next.js 16, TypeScript, Zustand, Recharts, Firebase)
+  - 🚀 **Maintenance**: Global version updated to v1.21, added to individual projects
 
 - **v1.20 (15/05/2026)**:
-  - 🎓 **Certs Expansion**: Incorporación de 4 nuevas certificaciones estratégicas: IA en Reclutamiento y Desarrollo (Renaiss), Evolución de la IA (FAGDUT) y Cloud/Agile (Globant).
-  - 🚀 **Maintenance**: Actualización de links de descarga y versión global del sistema.
+  - 🎓 **Certs Expansion**: Added 4 strategic certifications (Renaiss AI Recruitment, FAGDUT AI Evolution, Globant Cloud/Agile)
+  - 🚀 **Maintenance**: Updated download links and global system version
 
 - **v1.19 (11/05/2026)**:
-  - 📋 **JobQuest Integration**: Agregado JobQuest - Job Application Tracker, aplicación serverless completa con Angular 21, Firebase Auth, Cloud Firestore, RxJS y soporte multi-idioma.
-  - 🎨 **Skills Update**: Añadidos Angular, RxJS, Firebase (Auth/Firestore) y Vercel al stack de habilidades técnicas.
-  - 📊 **Project Count**: Portafolio ahora muestra 7 proyectos (2 grupales + 5 individuales).
+  - 📋 **JobQuest Integration**: Added JobQuest - Job Application Tracker (Angular 21, Firebase Auth, Cloud Firestore, RxJS, i18n)
+  - 🎨 **Skills Update**: Added Angular, RxJS, Firebase, Vercel to technical skills
+  - 📊 **Project Count**: Portfolio now displays 7 projects (2 group + 5 individual)
 
 - **v1.18 (07/05/2026)**:
-  - 🤖 **AI & Data Engineering Focus**: Expansión integral del perfil hacia la Ingeniería de Datos e IA, integrando certificaciones avanzadas de **Databricks** (AI Agents, AI/BI, Fundamentals) y nuevas habilidades en LLMs.
-  - 🏗️ **Enterprise-Grade Projects**: Actualización profunda de **Help Desk Pro** (Multi-tenancy, Control de Stock corporativo) y **Balances** (Análisis de composición financiera v2.0).
-  - 🛠️ **Skills Overhaul**: Adición de **Power BI**, **Databricks**, **AI Agents** y **Prompt Engineering** al stack técnico global.
-  - 🎓 **Certs Update**: Integración de nuevas certificaciones de Databricks, Oracle y React Challenge.
+  - 🤖 **AI & Data Engineering Focus**: Comprehensive shift to Data Engineering and AI, Databricks certifications (AI Agents, AI/BI, Fundamentals), LLMs
+  - 🏗️ **Enterprise Projects**: Updated Help Desk Pro (Multi-tenancy, Corporate Stock Control) and Balances (Financial Analysis v2.0)
+  - 🛠️ **Skills Overhaul**: Added Power BI, Databricks, AI Agents, Prompt Engineering
+  - 🎓 **Certs Update**: New certifications from Databricks, Oracle, React Challenge
 
 - **v1.17 (29/04/2026)**:
-  - 💰 **Fintech Project**: Integración de **Balances**, una plataforma de finanzas personales con estética Glassmorphism y sistema de internacionalización (i18n) en español/inglés integrado, además de la posibilidad de alternar entre modo claro y modo oscuro.
-  - 🛠️ **Skills Expansion**: Adición de Vanilla CSS, Framer Motion (con iconos), i18n y localStorage al stack global de habilidades.
-  - 📝 **Project Differentiation**: Optimización de descripciones para distinguir claramente entre productos completos (Balances) y desafíos técnicos (Zorvyn).
+  - 💰 **Fintech Project**: Added Balances - Personal finance platform with Glassmorphism, dark/light mode, i18n
+  - 🛠️ **Skills Expansion**: Added Vanilla CSS, Framer Motion (with icons), i18n, localStorage
+  - 📝 **Project Differentiation**: Optimized descriptions to distinguish complete products from technical challenges
 - **v1.16 (28/04/2026)**:
-  - 🚀 **Ultra-Cache-Buster**: Implementamos un sistema de timestamps dinámicos. Olvídate de las versiones viejas; ahora siempre obtienes el CV v1.16 más reciente directo de la fuente.
-  - 💎 **Visual Polish**: Iconografía expandida (PostgreSQL, MongoDB, Prisma) y assets normalizados para un look impecable en cualquier dispositivo.
-  - 🛠️ **Project Spotlight**: Help Desk Pro totalmente integrado con descripciones optimizadas para una simetría perfecta en la grid.
-  - 📂 **Dual-CV Experience**: El modal ahora es inteligente y te permite elegir el idioma del documento sin rodeos.
+  - 🚀 **Ultra-Cache-Buster**: Dynamic timestamp system for latest CV files
+  - 💎 **Visual Polish**: Expanded iconography (PostgreSQL, MongoDB, Prisma), normalized assets
+  - 🛠️ **Project Spotlight**: Fully integrated Help Desk Pro with optimized grid symmetry
+  - 📂 **Dual-CV Experience**: Smart modal for language selection without redirects
 - **v1.15 (28/04/2026)**:
-  - **CV Download Refactor**: El modal ahora permite elegir entre descargar el CV en Español o Inglés de forma independiente.
-  - **Cache Busting**: Implementación de timestamp dinámico en las URLs de descarga para asegurar la obtención de los archivos más recientes.
-  - **Actualización de Archivos**: Vinculación de los nuevos documentos CV v1.15.
-- **v1.14 (28/04/2026)**: 
-  - **Nuevo Proyecto**: Integración de Help Desk Pro (Sistema de gestión de tickets).
-  - **Skills Update**: Adición de Material UI y React Router al stack técnico y mapeo dinámico de iconos.
-  - **Estabilidad**: Implementación de manejador de errores en imágenes (fallback) y normalización de assets para evitar problemas de case-sensitivity en servidores Linux.
-  - **CV Update**: Actualización de los archivos CV (Español/Inglés) con el nuevo proyecto y stack tecnológico v1.14.
-- **v1.13 (24/04/2026)**: 
-  - **Formulario de Contacto Funcional**: Integración con FormSubmit.co para recepción de mensajes vía email sin backend.
-  - **Traducciones de Experiencia**: Localización al inglés de los nombres de instituciones en la sección de Experiencia Profesional.
-  - **Feedback Dinámico**: Implementación de estados de carga (sending) y mensajes de éxito/error en el formulario.
-- **v1.12 (23/04/2026)**: 
-  - Optimización y detallado avanzado de arquitecturas técnicas en proyectos clave (Next.js, Prisma, MikroORM, MongoDB).
-  - Mejora de descripciones para resaltar el valor técnico y profesional de cada proyecto.
-  - Sincronización integral de habilidades técnicas con el stack de los proyectos.
-  - Adición de acceso directo a **Contacto** en el navbar y menú móvil.
-- **v1.11 (23/04/2026)**: 
-  - **Refinamiento Mobile**: Ajuste integral de paddings, tamaños de fuente y alineaciones para una experiencia móvil de alta calidad.
-  - Refactorización de espaciados y migración de estilos inline a CSS para mayor simetría y mantenibilidad.
-- **v1.10 (23/04/2026)**: 
-  - Integración completa de **Framer Motion** para animaciones de scroll y transiciones.
-  - Implementación de **Menú Hamburguesa** responsivo para mobile.
-  - Optimización de descarga de CV: detección automática de idioma y modal de confirmación.
-  - Actualización de contenido: sección de **Desarrollo con IA** y Prompt Engineering.
-- **v1.01 (20/04/2026)**: Mejora de footer y visualización de logos.
-- **v1.00 (15/04/2026)**: Lanzamiento inicial del portfolio responsivo con soporte bilingüe.
+  - **CV Download Refactor**: Independent Spanish/English CV download options
+  - **Cache Busting**: Dynamic timestamps in download URLs
+  - **File Updates**: New v1.15 CV documents
+- **v1.14 (28/04/2026)**: Added Help Desk Pro, Material UI + React Router, image error handling, Linux case-sensitivity fixes
+- **v1.13 (24/04/2026)**: Added functional contact form (FormSubmit.co), English translations for experience institutions
+- **v1.12 (23/04/2026)**: Advanced architecture optimization (Next.js, Prisma, MongoDB), enhanced project descriptions
+- **v1.11 (23/04/2026)**: Mobile refinements (padding, font sizes, alignment), inline style migration to CSS
+- **v1.10 (23/04/2026)**: Framer Motion integration, hamburger menu, auto-detect CV language, AI development section
+- **v1.01 (20/04/2026)**: Footer improvements and logo enhancements
+- **v1.00 (15/04/2026)**: Initial responsive portfolio launch with bilingual support
 
-##  Contacto
+### Contact
+
+- **LinkedIn**: [Miguel Rodríguez](https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/)
+- **GitHub**: [@Miguel58000](https://github.com/Miguel58000)
+- **Email**: miguelrodriguezips36@gmail.com
+
+---
+
+<a id="español"></a>
+
+## 🇦🇷 Español
+
+Un portfolio profesional de alto rendimiento que muestra mi perfil como Ingeniero en Sistemas, mis proyectos técnicos y mis capacidades profesionales. Construido con principios de diseño modernos y un layout editorial con navegación lateral.
+
+### Características
+
+- **Layout editorial moderno**: Navegación lateral fija en escritorio (que pasa a una barra superior con menú desplegable en móvil), hero en dos columnas con retrato y secciones limpias basadas en filas
+- **Totalmente responsive**: Optimizado para móvil, tablet y escritorio
+- **Interfaz bilingüe**: Soporte completo en español e inglés
+- **Sistema de temas dinámico**: Modo oscuro/claro inteligente con persistencia
+- **Movimiento con propósito**: Una única animación de entrada en el hero, modal y mensajes del formulario animados, y soporte para `prefers-reduced-motion`
+- **Habilidades orientadas a IA**: Sección dedicada a desarrollo con IA e ingeniería de prompts
+- **Stack tecnológico interactivo**: Habilidades organizadas en pestañas por categoría, con un panel de mosaicos por tecnología
+- **Secciones completas**:
+  - Hero con resumen profesional y retrato
+  - Formación académica
+  - Experiencia laboral con detalles desplegables
+  - Habilidades técnicas con sistema dinámico de íconos
+  - Certificaciones organizadas por categoría
+  - Proyectos destacados con enlaces a GitHub, demos en vivo y presentaciones
+  - Formulario de contacto funcional con lista de contacto dedicada
+
+### Stack tecnológico
+
+- **Frontend**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **UI y ruteo**: [Material UI](https://mui.com/) + [React Router](https://reactrouter.com/)
+- **Iconografía**: [Lucide React](https://lucide.dev/) + [Devicons](https://devicon.dev/)
+- **Animaciones**: [Framer Motion](https://www.framer.com/motion/)
+- **Tipografía**: Bricolage Grotesque + Hanken Grotesk (Google Fonts)
+- **Estilos**: CSS3 puro con variables CSS, grid, flexbox y animaciones
+- **Despliegue**: Listo para Vercel o Netlify
+
+### Instalación y uso local
+
+1. Cloná el repositorio:
+   ```bash
+   git clone https://github.com/Miguel58000/Portfolio-Miguel-Rodriguez.git
+   ```
+2. Entrá al directorio del proyecto:
+   ```bash
+   cd Portfolio-Miguel-Rodriguez
+   ```
+3. Instalá las dependencias:
+   ```bash
+   npm install
+   ```
+4. Iniciá el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+### Historial de versiones
+
+- **v1.24 (08/10/2026)**:
+  - 🧱 **Rediseño estructural**: Nuevo layout con navegación lateral fija (barra superior con menú desplegable en móvil), hero en dos columnas con retrato, Experiencia / Habilidades / Certificaciones en filas, tarjetas de proyectos horizontales y sección de contacto dividida (lista de contacto + formulario)
+  - 🪪 **Nueva marca**: Se reemplazó el logo "MIGUEL.DEV" por un monograma "MR" junto al nombre completo, tanto en la barra lateral como en el footer
+  - 🧰 **Rediseño del stack tecnológico**: Las habilidades ahora usan pestañas por categoría con un panel de mosaicos por tecnología, mostrando la cantidad de elementos de cada categoría
+  - 🎨 **Renovación visual**: Nueva tipografía (Bricolage Grotesque + Hanken Grotesk), radios más contenidos, superficies más planas y títulos de sección marcados, manteniendo la paleta original (índigo en modo claro, verde lima sobre negro en modo oscuro)
+  - 🧭 **Navegación**: El seguimiento de la sección activa ahora usa `IntersectionObserver` en lugar de un listener de scroll
+  - 🎞️ **Movimiento**: Se eliminaron las animaciones de aparición por sección; se mantuvieron la entrada del hero, el modal y los mensajes del formulario; se agregó soporte para `prefers-reduced-motion`
+  - 📂 **Actualización de CV**: La versión mostrada en la descarga del CV, el nombre del archivo y el cache-buster se actualizaron a v1.24
+  - 🚀 **Mantenimiento**: Versión global actualizada a v1.24
+
+- **v1.23 (07/10/2026)**:
+  - 🔬 **Experiencia en investigación**: Se agregó el rol de Colaborador de Investigación en el proyecto de Ciencia de Datos de la UTN (Python, Pandas, NumPy, Scikit-learn, EDA, Clustering)
+  - 🧭 **Reposicionamiento de perfil**: Nuevo título "Analista de Sistemas | Data & AI | Software" y resumen profesional actualizado
+  - 🛠️ **Actualización de habilidades**: Se agregaron Tableau, KNIME, dbt, IBM SPSS Statistics/Modeler y Redes Neuronales/Deep Learning
+  - 🔗 **Redes**: Se agregó el botón de Salesforce en los enlaces sociales
+  - 📂 **Actualización de CV**: Archivos de CV en español e inglés actualizados
+  - 🚀 **Mantenimiento**: Versión global actualizada a v1.23
+
+- **v1.22 (25/08/2026)**:
+  - 📂 **Actualización de CV**: Archivos de CV en español e inglés actualizados
+  - 🚀 **Mantenimiento**: Actualización de versión en todo el sistema y de la fecha de última modificación
+
+- **v1.21 (27/06/2026)**:
+  - 🏋️‍♂️ **Integración de LiftLab**: Se agregó una app avanzada de gestión de entrenamientos (Next.js 16, TypeScript, Zustand, Recharts, Firebase)
+  - 🚀 **Mantenimiento**: Versión global actualizada a v1.21, agregado a proyectos individuales
+
+- **v1.20 (15/05/2026)**:
+  - 🎓 **Ampliación de certificaciones**: Se agregaron 4 certificaciones estratégicas (Renaiss AI Recruitment, FAGDUT AI Evolution, Globant Cloud/Agile)
+  - 🚀 **Mantenimiento**: Enlaces de descarga y versión global del sistema actualizados
+
+- **v1.19 (11/05/2026)**:
+  - 📋 **Integración de JobQuest**: Se agregó JobQuest - Seguimiento de postulaciones laborales (Angular 21, Firebase Auth, Cloud Firestore, RxJS, i18n)
+  - 🎨 **Actualización de habilidades**: Se agregaron Angular, RxJS, Firebase y Vercel a las habilidades técnicas
+  - 📊 **Cantidad de proyectos**: El portfolio ahora muestra 7 proyectos (2 grupales + 5 individuales)
+
+- **v1.18 (07/05/2026)**:
+  - 🤖 **Enfoque en IA e Ingeniería de Datos**: Giro integral hacia Ingeniería de Datos e IA, certificaciones de Databricks (AI Agents, AI/BI, Fundamentals), LLMs
+  - 🏗️ **Proyectos empresariales**: Actualización de Help Desk Pro (multi-tenancy, control de stock corporativo) y Balances (Análisis Financiero v2.0)
+  - 🛠️ **Renovación de habilidades**: Se agregaron Power BI, Databricks, AI Agents e Ingeniería de Prompts
+  - 🎓 **Actualización de certificaciones**: Nuevas certificaciones de Databricks, Oracle y React Challenge
+
+- **v1.17 (29/04/2026)**:
+  - 💰 **Proyecto Fintech**: Se agregó Balances - Plataforma de finanzas personales con Glassmorphism, modo oscuro/claro e i18n
+  - 🛠️ **Ampliación de habilidades**: Se agregaron Vanilla CSS, Framer Motion (con íconos), i18n y localStorage
+  - 📝 **Diferenciación de proyectos**: Descripciones optimizadas para distinguir productos completos de desafíos técnicos
+- **v1.16 (28/04/2026)**:
+  - 🚀 **Ultra-Cache-Buster**: Sistema de marcas de tiempo dinámicas para los últimos archivos de CV
+  - 💎 **Pulido visual**: Iconografía ampliada (PostgreSQL, MongoDB, Prisma), assets normalizados
+  - 🛠️ **Proyecto destacado**: Help Desk Pro totalmente integrado con simetría de grilla optimizada
+  - 📂 **Experiencia de CV dual**: Modal inteligente para elegir idioma sin redirecciones
+- **v1.15 (28/04/2026)**:
+  - **Refactor de descarga de CV**: Opciones de descarga independientes para CV en español e inglés
+  - **Cache Busting**: Marcas de tiempo dinámicas en las URLs de descarga
+  - **Actualización de archivos**: Nuevos documentos de CV v1.15
+- **v1.14 (28/04/2026)**: Se agregó Help Desk Pro, Material UI + React Router, manejo de errores de imágenes y correcciones de mayúsculas/minúsculas en Linux
+- **v1.13 (24/04/2026)**: Se agregó un formulario de contacto funcional (FormSubmit.co) y traducciones al inglés de las instituciones de experiencia
+- **v1.12 (23/04/2026)**: Optimización avanzada de arquitectura (Next.js, Prisma, MongoDB) y descripciones de proyectos mejoradas
+- **v1.11 (23/04/2026)**: Refinamientos móviles (padding, tamaños de fuente, alineación) y migración de estilos en línea a CSS
+- **v1.10 (23/04/2026)**: Integración de Framer Motion, menú hamburguesa, detección automática del idioma del CV y sección de desarrollo con IA
+- **v1.01 (20/04/2026)**: Mejoras en el footer y en los logos
+- **v1.00 (15/04/2026)**: Lanzamiento inicial del portfolio responsive con soporte bilingüe
+
+### Contacto
 
 - **LinkedIn**: [Miguel Rodríguez](https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/)
 - **GitHub**: [@Miguel58000](https://github.com/Miguel58000)

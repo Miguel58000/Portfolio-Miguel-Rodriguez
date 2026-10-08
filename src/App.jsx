@@ -6,78 +6,182 @@ import { certificationsData } from './data/certifications';
 import {
   FileDown, Moon, Sun, Languages, Github, ExternalLink, Code2, Server, Globe2, Briefcase,
   Database, ShieldCheck, BarChart, LayoutDashboard, Mail, Phone, MapPin, GraduationCap,
-  Layers, Terminal, Cloud, CheckCircle2, Send, Cpu, PenTool, FileText, Activity, Building2, ChevronDown, ChevronUp,
-  Instagram, Linkedin, MessageSquare, ArrowUp, Youtube, Menu, X, Brain, Sparkles, Award
+  Layers, Terminal, Cloud, CheckCircle2, Send, Cpu, Activity, ChevronDown, ChevronUp,
+  Linkedin, MessageSquare, ArrowUp, Youtube, Menu, X, Brain, Sparkles
 } from 'lucide-react';
 
 const UTN_LOGO_URL = "/Logo%20UTN.png";
 const MUNI_LOGO_URL = "/Logo%20Muni.png";
 
+const dv = (p) => `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${p}.svg`;
+const ICONS = {
+  'Next.js 16': dv('nextjs/nextjs-original'), 'Next.js': dv('nextjs/nextjs-original'),
+  'React': dv('react/react-original'), 'React.js': dv('react/react-original'),
+  'Node.js': dv('nodejs/nodejs-original'), 'TypeScript': dv('typescript/typescript-original'),
+  'Python': dv('python/python-original'), 'Pandas': dv('pandas/pandas-original'),
+  'NumPy': dv('numpy/numpy-original'), 'Scikit-learn': dv('scikitlearn/scikitlearn-original'),
+  'Vite': dv('vitejs/vitejs-original'), 'Tailwind CSS': dv('tailwindcss/tailwindcss-original'),
+  'MySQL': dv('mysql/mysql-original'), 'PostgreSQL': dv('postgresql/postgresql-original'),
+  'SQL Server': dv('microsoftsqlserver/microsoftsqlserver-original'), 'Oracle': dv('oracle/oracle-original'),
+  'MongoDB': dv('mongodb/mongodb-original'), 'Supabase': dv('supabase/supabase-original'),
+  'JavaScript': dv('javascript/javascript-original'), 'Express': dv('express/express-original'),
+  'Linux': dv('linux/linux-original'), 'Windows': dv('windows8/windows8-original'),
+  'Material UI': dv('materialui/materialui-original'), 'React Router': dv('reactrouter/reactrouter-original'),
+  'Prisma': dv('prisma/prisma-original'), 'Vanilla CSS': dv('css3/css3-original'),
+  'Framer Motion': dv('framermotion/framermotion-original'), 'Angular': dv('angularjs/angularjs-original'),
+  'RxJS': dv('rxjs/rxjs-original'), 'Firebase': dv('firebase/firebase-plain'),
+  'Firebase Auth': dv('firebase/firebase-plain'), 'Firestore': dv('firebase/firebase-plain'),
+  'Cloud Firestore': dv('firebase/firebase-plain'), 'Git': dv('git/git-original'),
+  'GitHub': dv('github/github-original'), 'Bitbucket': dv('bitbucket/bitbucket-original'),
+  'Jest': dv('jest/jest-plain'), 'Cypress': dv('cypressio/cypressio-original'),
+  'AWS': dv('amazonwebservices/amazonwebservices-original-wordmark'), 'Postman': dv('postman/postman-original'),
+  'dbt': '/dbt-logo.svg', 'Salesforce': dv('salesforce/salesforce-original'),
+  'Power BI': 'https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg',
+  'Tableau': 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tableau.svg',
+  'KNIME': 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/knime.svg',
+  'SQL': dv('azuresqldatabase/azuresqldatabase-original')
+};
+const getTechIcon = (tech) => ICONS[tech] || null;
+
+const S = (name, src, className) => ({ name, src, className });
+const I = (name, icon) => ({ name, icon });
+
+/* ---------- Reusable pieces ---------- */
+const Section = ({ id, title, children }) => (
+  <section id={id} className="section">
+    <header className="section-head"><h2>{title}</h2></header>
+    {children}
+  </section>
+);
+
+const TechTags = ({ list }) => (
+  <div className="tags">
+    {list.map(tech => (
+      <span key={tech} className="tag">
+        {getTechIcon(tech) && <img src={getTechIcon(tech)} alt="" />}
+        {tech}
+      </span>
+    ))}
+  </div>
+);
+
+const Collapse = ({ open, children }) => (
+  <div className={`collapse ${open ? 'open' : ''}`}><div>{children}</div></div>
+);
+
+const ToggleBtn = ({ open, onClick, lang }) => (
+  <button className="toggle" onClick={onClick} aria-expanded={open}>
+    {open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+    <span>{lang === 'es' ? 'Descripción' : 'Description'}</span>
+  </button>
+);
+
+const Bullets = ({ items }) => (
+  <ul className="bullets">
+    {items.map((item, i) => (
+      <li key={i}><CheckCircle2 size={16} />{item}</li>
+    ))}
+  </ul>
+);
+
+const ExpRow = ({ logo, alt, d, tags, open, onToggle, lang }) => (
+  <article className="row exp">
+    <div className="row-side">
+      <img src={logo} alt={alt} className="logo" loading="lazy" />
+      <span className="period">{d.period}</span>
+    </div>
+    <div className="row-main">
+      <h3 className="role">{d.role}</h3>
+      <span className="company">{d.company}</span>
+      <ToggleBtn open={open} onClick={onToggle} lang={lang} />
+      <Collapse open={open}>
+        {d.desc && <p className="muted italic">{d.desc}</p>}
+        <Bullets items={d.items} />
+      </Collapse>
+      <TechTags list={tags} />
+    </div>
+  </article>
+);
+
+const ProjectRow = ({ p, lang, open, onToggle, group }) => (
+  <article className="proj">
+    <div className="proj-img">
+      {p.image ? (
+        <img
+          src={p.image} alt={p.title} loading="lazy"
+          onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+        />
+      ) : null}
+      <div className="proj-ph" style={{ display: p.image ? 'none' : 'flex' }}><Code2 size={40} /></div>
+    </div>
+    <div className="proj-body">
+      <h4 className="proj-title">{lang === 'es' ? p.title : (p.enTitle || p.title)}</h4>
+      <ToggleBtn open={open} onClick={onToggle} lang={lang} />
+      <Collapse open={open}>
+        <p className="muted">{lang === 'es' ? p.description : p.enDescription}</p>
+      </Collapse>
+      <TechTags list={p.techs} />
+      <div className="proj-actions">
+        {p.liveUrl && (
+          <a href={p.liveUrl} target="_blank" rel="noreferrer" className="link-btn"><ExternalLink size={16} /> Live</a>
+        )}
+        {group && p.id === 'veterinaria' && (
+          <a href="https://www.youtube.com/watch?v=_UIGXiYF8HM" target="_blank" rel="noreferrer" className="link-btn yt"><Youtube size={16} /> Demo</a>
+        )}
+        {p.repoUrl && (
+          <a href={p.repoUrl} target="_blank" rel="noreferrer" className="link-btn">
+            <Github size={16} /> {group && p.repoUrlBackend ? 'Frontend' : 'Repo'}
+          </a>
+        )}
+        {group && p.repoUrlBackend && (
+          <a href={p.repoUrlBackend} target="_blank" rel="noreferrer" className="link-btn"><Server size={16} /> Backend</a>
+        )}
+      </div>
+    </div>
+  </article>
+);
+
+/* ---------- App ---------- */
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'es');
   const [activeSection, setActiveSection] = useState('hero');
-  const [expandedProjects, setExpandedProjects] = useState({});
-  const [expandedExperience, setExpandedExperience] = useState({});
+  const [expandedItems, setExpandedItems] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showCvModal, setShowCvModal] = useState(false);
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [activeSkill, setActiveSkill] = useState('dataAnalytics');
 
-  const toggleProject = (id) => {
-    setExpandedProjects(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const toggleExperience = (id) => {
-    setExpandedExperience(prev => ({ ...prev, [id]: !prev[id] }));
-  };
+  const toggleItem = (id) => setExpandedItems(prev => ({ ...prev, [id]: !prev[id] }));
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  useEffect(() => { localStorage.setItem('lang', lang); }, [lang]);
+
   useEffect(() => {
-    localStorage.setItem('lang', lang);
-  }, [lang]);
-
-  // Scroll spy implementation
-  useEffect(() => {
-    const sections = ['hero', 'about', 'education', 'experience', 'skills', 'certs', 'projects', 'contact'];
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 150;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const ids = ['hero', 'about', 'education', 'experience', 'skills', 'certs', 'projects', 'contact'];
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => e.isIntersecting && setActiveSection(e.target.id)),
+      { rootMargin: '-35% 0px -60% 0px' }
+    );
+    ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+    return () => observer.disconnect();
   }, []);
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   const toggleLang = () => setLang(prev => prev === 'es' ? 'en' : 'es');
-
   const t = translations[lang];
 
-  // Dynamic CV download handler
   const handleDownloadCv = (downloadLang) => {
     const targetLang = downloadLang || lang;
     const link = document.createElement('a');
-    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.23-${Date.now()}` : `/cv-en.pdf?v=1.23-${Date.now()}`;
-    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.23.pdf`;
-    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.22-${Date.now()}` : `/cv-en.pdf?v=1.22-${Date.now()}`;
-    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.23.pdf`;
+    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.24-${Date.now()}` : `/cv-en.pdf?v=1.24-${Date.now()}`;
+    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.24.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -93,22 +197,12 @@ function App() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
-
     try {
       const response = await fetch("https://formsubmit.co/ajax/miguelrodriguezips36@gmail.com", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          subject: formState.subject,
-          message: formState.message,
-        }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formState),
       });
-
       const result = await response.json();
       if (result.success) {
         setSubmitStatus('success');
@@ -126,1038 +220,423 @@ function App() {
 
   const skillCategories = [
     {
-      id: 'dataAnalytics',
-      icon: <BarChart size={22} />,
-      title: t.skills.categories.dataAnalytics,
+      id: 'dataAnalytics', icon: <BarChart size={20} />, title: t.skills.categories.dataAnalytics,
       skills: [
-        { name: "Python", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
-        { name: "SQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg" },
-        { name: "Pandas", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" },
-        { name: "NumPy", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" },
-        { name: "Scikit-learn", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg" },
-        { name: "Power BI", src: "https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg" },
-        { name: "Tableau", src: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tableau.svg" },
-        { name: "KNIME", src: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/knime.svg" },
-        { name: "dbt", src: "/dbt-logo.svg", className: "dbt-logo-img" },
-        { name: "IBM SPSS Statistics", icon: <Activity size={14} /> },
-        { name: "IBM SPSS Modeler", icon: <Activity size={14} /> },
-        { name: "EDA (Exploratory Data Analysis)", icon: <Activity size={14} /> },
-        { name: "Data Cleaning & Validation", icon: <CheckCircle2 size={14} /> },
-        { name: "Dashboards & KPIs", icon: <LayoutDashboard size={14} /> }
+        S("Python", ICONS['Python']), S("SQL", ICONS['SQL']), S("Pandas", ICONS['Pandas']),
+        S("NumPy", ICONS['NumPy']), S("Scikit-learn", ICONS['Scikit-learn']), S("Power BI", ICONS['Power BI']),
+        S("Tableau", ICONS['Tableau']), S("KNIME", ICONS['KNIME']), S("dbt", "/dbt-logo.svg", "dbt-logo-img"),
+        I("IBM SPSS Statistics", <Activity size={14} />), I("IBM SPSS Modeler", <Activity size={14} />),
+        I("EDA (Exploratory Data Analysis)", <Activity size={14} />),
+        I("Data Cleaning & Validation", <CheckCircle2 size={14} />),
+        I("Dashboards & KPIs", <LayoutDashboard size={14} />)
       ]
     },
     {
-      id: 'aiMl',
-      icon: <Brain size={22} />,
-      title: t.skills.categories.aiMl,
+      id: 'aiMl', icon: <Brain size={20} />, title: t.skills.categories.aiMl,
       skills: [
-        { name: "Machine Learning Fundamentals", icon: <Brain size={14} /> },
-        { name: "Predictive Modeling & Classification", icon: <Activity size={14} /> },
-        { name: "Clustering", icon: <Layers size={14} /> },
-        { name: "IBM SPSS Modeler", icon: <Activity size={14} /> },
-        { name: "Prompt Engineering", icon: <Sparkles size={14} /> },
-        { name: "Large Language Models (LLMs)", icon: <Cpu size={14} /> },
-        { name: "Neural Networks / Deep Learning", icon: <Brain size={14} /> }
+        I("Machine Learning Fundamentals", <Brain size={14} />),
+        I("Predictive Modeling & Classification", <Activity size={14} />),
+        I("Clustering", <Layers size={14} />), I("IBM SPSS Modeler", <Activity size={14} />),
+        I("Prompt Engineering", <Sparkles size={14} />), I("Large Language Models (LLMs)", <Cpu size={14} />),
+        I("Neural Networks / Deep Learning", <Brain size={14} />)
       ]
     },
     {
-      id: 'databases',
-      icon: <Database size={22} />,
-      title: t.skills.categories.databases,
+      id: 'databases', icon: <Database size={20} />, title: t.skills.categories.databases,
       skills: [
-        { name: "PostgreSQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
-        { name: "MySQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
-        { name: "SQL Server", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg" },
-        { name: "Oracle (PL/SQL)", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
-        { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
-        { name: "DB Design", icon: <Database size={14} /> }
+        S("PostgreSQL", ICONS['PostgreSQL']), S("MySQL", ICONS['MySQL']), S("SQL Server", ICONS['SQL Server']),
+        S("Oracle (PL/SQL)", ICONS['Oracle']), S("MongoDB", ICONS['MongoDB']), I("DB Design", <Database size={14} />)
       ]
     },
     {
-      id: 'backendApis',
-      icon: <Server size={22} />,
-      title: t.skills.categories.backendApis,
+      id: 'backendApis', icon: <Server size={20} />, title: t.skills.categories.backendApis,
       skills: [
-        { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
-        { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
-        { name: "Supabase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
-        { name: "REST APIs", icon: <Server size={14} /> },
-        { name: "JWT", icon: <ShieldCheck size={14} /> },
-        { name: "Firebase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
-        { name: "Postman", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
-        { name: "Integration Troubleshooting", icon: <Cpu size={14} /> }
+        S("Node.js", ICONS['Node.js']), S("Express", ICONS['Express']), S("Supabase", ICONS['Supabase']),
+        I("REST APIs", <Server size={14} />), I("JWT", <ShieldCheck size={14} />),
+        S("Firebase", ICONS['Firebase']), S("Postman", ICONS['Postman']),
+        I("Integration Troubleshooting", <Cpu size={14} />)
       ]
     },
     {
-      id: 'systemsSupport',
-      icon: <ShieldCheck size={22} />,
-      title: t.skills.categories.systemsSupport,
+      id: 'systemsSupport', icon: <ShieldCheck size={20} />, title: t.skills.categories.systemsSupport,
       skills: [
-        { name: "Windows", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg" },
-        { name: "Linux", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" },
-        { name: "Software Installation & Config", icon: <Terminal size={14} /> },
-        { name: "Hardware Diagnostics", icon: <Cpu size={14} /> },
-        { name: "Workstations Support", icon: <Briefcase size={14} /> },
-        { name: "User Troubleshooting & Support", icon: <ShieldCheck size={14} /> }
+        S("Windows", ICONS['Windows']), S("Linux", ICONS['Linux']),
+        I("Software Installation & Config", <Terminal size={14} />), I("Hardware Diagnostics", <Cpu size={14} />),
+        I("Workstations Support", <Briefcase size={14} />), I("User Troubleshooting & Support", <ShieldCheck size={14} />)
       ]
     },
     {
-      id: 'networking',
-      icon: <Globe2 size={22} />,
-      title: t.skills.categories.networking,
+      id: 'networking', icon: <Globe2 size={20} />, title: t.skills.categories.networking,
       skills: [
-        { name: lang === 'es' ? "Configuración IP" : "IP Configuration", icon: <Terminal size={14} /> },
-        { name: lang === 'es' ? "Conectividad" : "Connectivity", icon: <Activity size={14} /> },
-        { name: "WiFi", icon: <Globe2 size={14} /> },
-        { name: lang === 'es' ? "Diagnóstico de Redes" : "Network Diagnostics", icon: <ShieldCheck size={14} /> }
+        I(lang === 'es' ? "Configuración IP" : "IP Configuration", <Terminal size={14} />),
+        I(lang === 'es' ? "Conectividad" : "Connectivity", <Activity size={14} />),
+        I("WiFi", <Globe2 size={14} />),
+        I(lang === 'es' ? "Diagnóstico de Redes" : "Network Diagnostics", <ShieldCheck size={14} />)
       ]
     },
     {
-      id: 'cloudTools',
-      icon: <Cloud size={22} />,
-      title: t.skills.categories.cloudTools,
+      id: 'cloudTools', icon: <Cloud size={20} />, title: t.skills.categories.cloudTools,
       skills: [
-        { name: "Firebase Auth / Firestore", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
-        { name: "AWS (IAM, EC2, S3)", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-        { name: "Git", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
-        { name: "GitHub", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
-        { name: "Bitbucket", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bitbucket/bitbucket-original.svg" },
-        { name: "Jest", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jest/jest-plain.svg" },
-        { name: "Cypress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg" },
-        { name: "Scrum / Kanban", icon: <CheckCircle2 size={14} /> },
-        { name: "Salesforce", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/salesforce/salesforce-original.svg" }
+        S("Firebase Auth / Firestore", ICONS['Firebase']), S("AWS (IAM, EC2, S3)", ICONS['AWS']),
+        S("Git", ICONS['Git']), S("GitHub", ICONS['GitHub']), S("Bitbucket", ICONS['Bitbucket']),
+        S("Jest", ICONS['Jest']), S("Cypress", ICONS['Cypress']),
+        I("Scrum / Kanban", <CheckCircle2 size={14} />), S("Salesforce", ICONS['Salesforce'])
       ]
     },
     {
-      id: 'frontend',
-      icon: <Layers size={22} />,
-      title: t.skills.categories.frontend,
+      id: 'frontend', icon: <Layers size={20} />, title: t.skills.categories.frontend,
       skills: [
-        { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
-        { name: "Angular", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" },
-        { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
-        { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-        { name: "JavaScript ES6+", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
-        { name: "HTML5", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
-        { name: "Modern CSS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
-        { name: "Vite", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" }
+        S("React", ICONS['React']), S("Angular", ICONS['Angular']), S("Next.js", ICONS['Next.js']),
+        S("TypeScript", ICONS['TypeScript']), S("JavaScript ES6+", ICONS['JavaScript']),
+        S("HTML5", dv('html5/html5-original')), S("Modern CSS", ICONS['Vanilla CSS']), S("Vite", ICONS['Vite'])
       ]
     }
   ];
 
-  const getTechIcon = (tech) => {
-    const icons = {
-      'Next.js 16': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-      'Next.js': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-      'React': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-      'React.js': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-      'Node.js': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-      'TypeScript': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-      'Python': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-      'Pandas': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg",
-      'NumPy': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg",
-      'Scikit-learn': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg",
-      'Vite': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
-      'Tailwind CSS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-      'MySQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
-      'PostgreSQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-      'SQL Server': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg",
-      'Oracle': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg",
-      'MongoDB': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-      'Supabase': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
-      'JavaScript': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-      'Express': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
-      'Linux': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
-      'Windows': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg",
-      'Material UI': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg",
-      'React Router': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg",
-      'Prisma': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
-      'Vanilla CSS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-      'Framer Motion': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
-      'Angular': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg",
-      'RxJS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rxjs/rxjs-original.svg",
-      'Firebase': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
-      'Firebase Auth': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
-      'Firestore': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
-      'Cloud Firestore': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
-      'Git': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
-      'GitHub': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
-      'Bitbucket': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bitbucket/bitbucket-original.svg",
-      'Jest': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jest/jest-plain.svg",
-      'Cypress': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg",
-      'AWS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-      'Postman': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg",
-      'dbt': "/dbt-logo.svg",
-      'Salesforce': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/salesforce/salesforce-original.svg",
-      'Power BI': "https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg",
-      'Tableau': "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tableau.svg",
-      'KNIME': "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/knime.svg",
-      'SQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg"
-    };
-    return icons[tech] || null;
-  };
+  const navItems = [
+    ['about', t.nav.about], ['education', t.education.title], ['experience', t.experience.title],
+    ['skills', t.skills.title], ['certs', t.certifications.title], ['projects', t.nav.projects],
+    ['contact', t.nav.contact]
+  ];
+
+  const values = [
+    [Brain, t.about.dataAiLabel, t.about.dataAiDesc],
+    [ShieldCheck, t.about.opsLabel, t.about.opsDesc],
+    [Database, t.about.stackLabel, t.about.stackDesc],
+    [Cloud, t.about.salesforceLabel, t.about.salesforceDesc],
+    [Globe2, t.about.englishLabel, t.about.englishDesc]
+  ];
+
+  const education = [t.education.ingenieria, t.education.analista];
+
+  const contactCards = [
+    { icon: MapPin, label: t.contact.location },
+    { icon: Phone, label: t.contact.phone },
+    { icon: Mail, label: t.contact.email, href: `mailto:${t.contact.email}` },
+    { icon: Github, label: 'GitHub', href: t.contact.github, ext: true },
+    { icon: Globe2, label: 'LinkedIn', href: 'https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/', ext: true },
+    { icon: Cloud, label: 'Salesforce Trailblazer', href: t.contact.salesforce, ext: true }
+  ];
+
+  const formFields = [
+    ['text', 'name', t.contact.formName],
+    ['text', 'subject', t.contact.formSubject],
+    ['email', 'email', t.contact.formEmail]
+  ];
+
+  const certIcon = (c) => ({
+    'Core & Languages': <Globe2 size={18} />,
+    'Cloud & Backend': <Server size={18} />,
+    'Data Science, AI & Python': <BarChart size={18} />,
+    'Frontend & Web Development': <Layers size={18} />,
+    'Agile & Soft Skills': <ShieldCheck size={18} />
+  }[c]);
+
+  const footerVersion = lang === 'es'
+    ? 'v1.24 · Última actualización: 8 de octubre de 2026'
+    : 'v1.24 · Last updated: October 8, 2026';
 
   return (
-    <div className="app-container">
-      <nav className={isMenuOpen ? 'menu-open' : ''}>
-        <div className="nav-container">
-          <div className="nav-logo">
-            <h2 className="gradient-text" style={{ margin: 0, fontSize: '1.5rem' }}>MIGUEL.DEV</h2>
-          </div>
+    <div className="shell">
+      {/* SIDEBAR / TOPBAR */}
+      <aside className={`side ${isMenuOpen ? 'open' : ''}`}>
+        <div className="side-top">
+          <a href="#hero" className="brand" onClick={() => setIsMenuOpen(false)}>
+            <span className="mark">MR</span>
+            <span className="brand-name">Miguel Rodríguez</span>
+          </a>
+          <button className="icon-btn menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu">
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
 
-          <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-            <a href="#about" onClick={() => setIsMenuOpen(false)} className={activeSection === 'about' ? 'active' : ''}>{t.nav.about}</a>
-            <a href="#education" onClick={() => setIsMenuOpen(false)} className={activeSection === 'education' ? 'active' : ''}>{t.education.title}</a>
-            <a href="#experience" onClick={() => setIsMenuOpen(false)} className={activeSection === 'experience' ? 'active' : ''}>{t.experience.title}</a>
-            <a href="#skills" onClick={() => setIsMenuOpen(false)} className={activeSection === 'skills' ? 'active' : ''}>{t.skills.title}</a>
-            <a href="#certs" onClick={() => setIsMenuOpen(false)} className={activeSection === 'certs' ? 'active' : ''}>{t.certifications.title}</a>
-            <a href="#projects" onClick={() => setIsMenuOpen(false)} className={activeSection === 'projects' ? 'active' : ''}>{t.nav.projects}</a>
-            <a href="#contact" onClick={() => setIsMenuOpen(false)} className={activeSection === 'contact' ? 'active' : ''}>{t.nav.contact}</a>
-            <button
-              onClick={() => { setShowCvModal(true); setIsMenuOpen(false); }}
-              className="cv-nav-btn"
-            >
-              <FileDown size={18} /> CV
-            </button>
-          </div>
+        <nav className="side-nav">
+          {navItems.map(([id, label]) => (
+            <a key={id} href={`#${id}`} onClick={() => setIsMenuOpen(false)} className={activeSection === id ? 'active' : ''}>
+              {label}
+            </a>
+          ))}
+        </nav>
 
-          <div className="nav-controls">
-            <button className="icon-btn" onClick={toggleLang}>
-              <Languages size={20} /> <span style={{ marginLeft: '5px' }}>{lang.toUpperCase()}</span>
+        <div className="side-bottom">
+          <button className="btn btn-primary block" onClick={() => { setShowCvModal(true); setIsMenuOpen(false); }}>
+            <FileDown size={16} /> CV
+          </button>
+          <div className="side-tools">
+            <button className="icon-btn" onClick={toggleLang} aria-label="Language">
+              <Languages size={18} /> <span>{lang.toUpperCase()}</span>
             </button>
-            <button className="icon-btn" onClick={toggleTheme}>
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-            <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <button className="icon-btn" onClick={toggleTheme} aria-label="Theme">
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
         </div>
-      </nav>
+      </aside>
 
-      <section id="hero" className="hero">
-        <div className="container">
-          <motion.div
-            className="hero-content glass"
-            style={{ borderRadius: '2.5rem' }}
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.span
-              className="greeting"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              {t.hero.greeting}
-            </motion.span>
-            <motion.h1
-              className="hero-title gradient-text"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              {t.hero.name}
-            </motion.h1>
-            <motion.h2
-              className="hero-subtitle text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              {t.hero.title}
-            </motion.h2>
-            <motion.p
-              className="hero-desc text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              {t.about.summary}
-            </motion.p>
+      <div className="content">
+        <main>
+          {/* HERO */}
+          <section id="hero" className="hero">
             <motion.div
-              className="hero-actions"
-              initial={{ opacity: 0, y: 20 }}
+              className="hero-text"
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
             >
-              <a href="#projects" className="btn btn-primary"><Briefcase size={20} /> {t.nav.projects}</a>
-              <button onClick={() => setShowCvModal(true)} className="btn btn-outline glass"><FileDown size={20} /> {t.contact.downloadThisCv}</button>
+              <span className="eyebrow"><i /> {t.hero.greeting}</span>
+              <h1 className="hero-title">{t.hero.name}</h1>
+              <h2 className="hero-sub">{t.hero.title}</h2>
+              <p className="hero-desc">{t.about.summary}</p>
+              <div className="hero-actions">
+                <a href="#projects" className="btn btn-primary"><Briefcase size={18} /> {t.nav.projects}</a>
+                <button onClick={() => setShowCvModal(true)} className="btn btn-ghost">
+                  <FileDown size={18} /> {t.contact.downloadThisCv}
+                </button>
+              </div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      <motion.section
-        id="about"
-        className="container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="section-title gradient-text">{t.about.title}</h2>
-        <div className="about-grid">
-          <div className="about-image">
-            <div className="image-container glass">
-              <img src="/profile.jpg" alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1.5rem' }}
-                loading="lazy"
-                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-              <div className="image-placeholder" style={{ display: 'none' }}><Server size={100} /></div>
+            <div className="portrait">
+              <img
+                src="/profile.jpg" alt="Profile" loading="lazy"
+                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+              />
+              <div className="portrait-ph" style={{ display: 'none' }}><Server size={80} /></div>
             </div>
-          </div>
-          <div className="about-content glass">
-            <p className="mb-4">{t.about.p1}</p>
-            <p className="mb-6">{t.about.p2}</p>
-            <div className="about-value-container">
-              <h3 className="value-title gradient-text">{t.about.valueTitle}</h3>
-              <ul className="value-list">
-                <li>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <Brain className="value-icon" />
-                    <span className="value-label">{t.about.dataAiLabel}</span>
-                  </div>
-                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.dataAiDesc}</div>
-                </li>
-                <li>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <ShieldCheck className="value-icon" />
-                    <span className="value-label">{t.about.opsLabel}</span>
-                  </div>
-                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.opsDesc}</div>
-                </li>
-                <li>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <Database className="value-icon" />
-                    <span className="value-label">{t.about.stackLabel}</span>
-                  </div>
-                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.stackDesc}</div>
-                </li>
-                <li>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <Cloud className="value-icon" />
-                    <span className="value-label">{t.about.salesforceLabel}</span>
-                  </div>
-                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.salesforceDesc}</div>
-                </li>
-                <li>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <Globe2 className="value-icon" />
-                    <span className="value-label">{t.about.englishLabel}</span>
-                  </div>
-                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.englishDesc}</div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </motion.section>
+          </section>
 
-      <motion.section
-        id="education"
-        className="container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="section-title gradient-text">{t.education.title}</h2>
-        <div className="info-grid info-grid-2col">
-          <motion.div
-            className="info-card glass"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="info-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
-                <GraduationCap size={28} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
-                <span className="info-role">{t.education.ingenieria.degree}</span>
+          {/* ABOUT */}
+          <Section id="about" title={t.about.title}>
+            <div className="about">
+              <div className="about-text">
+                <p>{t.about.p1}</p>
+                <p>{t.about.p2}</p>
               </div>
-              <span className="info-period">{t.education.ingenieria.period}</span>
-            </div>
-            <span className="info-company">{t.education.ingenieria.school}</span>
-            <p className="project-desc">{t.education.ingenieria.status}</p>
-          </motion.div>
-          <motion.div
-            className="info-card glass"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="info-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
-                <GraduationCap size={28} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
-                <span className="info-role">{t.education.analista.degree}</span>
-              </div>
-              <span className="info-period">{t.education.analista.period}</span>
-            </div>
-            <span className="info-company">{t.education.analista.school}</span>
-            <p className="project-desc">{t.education.analista.status}</p>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      <motion.section
-        id="experience"
-        className="container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="section-title gradient-text">{t.experience.title}</h2>
-
-        {/* Fila 1: UTN — ocupa todo el ancho */}
-        <div className="info-grid" style={{ gridTemplateColumns: '1fr', marginBottom: '2rem' }}>
-          <motion.div
-            className="info-card glass"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="info-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <img src={UTN_LOGO_URL} alt="UTN Rosario" className="experience-logo-img" loading="lazy" />
-                <span className="info-role">{t.experience.utn.role}</span>
-              </div>
-              <span className="info-period">{t.experience.utn.period}</span>
-            </div>
-            <span className="info-company">{t.experience.utn.company}</span>
-
-            <button
-              className="description-toggle"
-              onClick={() => toggleExperience('utn')}
-              style={{ marginTop: '1rem' }}
-            >
-              {expandedExperience['utn'] ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-              <span>{lang === 'es' ? 'Descripción' : 'Description'}</span>
-            </button>
-
-            <div className={`project-desc-container ${expandedExperience['utn'] ? 'expanded' : ''}`}>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '0.75rem', fontStyle: 'italic' }}>
-                {t.experience.utn.desc}
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem', textAlign: 'left' }}>
-                {t.experience.utn.items.map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                    <CheckCircle2 size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '3px' }} />
-                    {item}
-                  </li>
+              <div className="values">
+                <h3 className="sub-title">{t.about.valueTitle}</h3>
+                {values.map(([Icon, label, desc]) => (
+                  <div key={label} className="value">
+                    <span className="icon-bubble"><Icon size={20} /></span>
+                    <div>
+                      <strong>{label}</strong>
+                      <p className="muted">{desc}</p>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-            <div className="skill-items" style={{ marginTop: '1.5rem' }}>
-              {['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'EDA', 'Clustering'].map(tech => (
-                <div key={tech} className="mini-tech-tag">
-                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
-                  {tech}
-                </div>
+          </Section>
+
+          {/* EDUCATION */}
+          <Section id="education" title={t.education.title}>
+            <div className="edu">
+              {education.map((ed, i) => (
+                <article key={i} className="edu-item">
+                  <span className="icon-bubble"><GraduationCap size={22} /></span>
+                  <div>
+                    <h3 className="role">{ed.degree}</h3>
+                    <span className="company">{ed.school}</span>
+                    <span className="period">{ed.period}</span>
+                    <p className="muted">{ed.status}</p>
+                  </div>
+                </article>
               ))}
             </div>
-          </motion.div>
-        </div>
+          </Section>
 
-        {/* Fila 2: HECA + Salud — 2 columnas */}
-        <div className="info-grid info-grid-2col">
-          <motion.div
-            className="info-card glass"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
-            <div className="info-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <img src={MUNI_LOGO_URL} alt="Muni Rosario / HECA" className="experience-logo-img" loading="lazy" />
-                <span className="info-role">{t.experience.heca.role}</span>
-              </div>
-              <span className="info-period">{t.experience.heca.period}</span>
+          {/* EXPERIENCE */}
+          <Section id="experience" title={t.experience.title}>
+            <div className="rows">
+              <ExpRow
+                logo={UTN_LOGO_URL} alt="UTN Rosario" d={t.experience.utn} lang={lang}
+                tags={['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'EDA', 'Clustering']}
+                open={!!expandedItems['utn']} onToggle={() => toggleItem('utn')}
+              />
+              <ExpRow
+                logo={MUNI_LOGO_URL} alt="Muni Rosario / HECA" d={t.experience.heca} lang={lang}
+                tags={['IT Support', 'Troubleshooting', 'APIs', 'Windows', 'Linux', 'Log Analysis', 'Networks']}
+                open={!!expandedItems['heca']} onToggle={() => toggleItem('heca')}
+              />
+              <ExpRow
+                logo={MUNI_LOGO_URL} alt="Secretaría de Salud Pública" d={t.experience.salud} lang={lang}
+                tags={['SQL', 'Troubleshooting', 'APIs', 'Functional Analysis', 'Continuous Improvement']}
+                open={!!expandedItems['salud']} onToggle={() => toggleItem('salud')}
+              />
             </div>
-            <span className="info-company">{t.experience.heca.company}</span>
+          </Section>
 
-            <button
-              className="description-toggle"
-              onClick={() => toggleExperience('heca')}
-              style={{ marginTop: '1rem' }}
-            >
-              {expandedExperience['heca'] ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-              <span>{lang === 'es' ? 'Descripción' : 'Description'}</span>
-            </button>
-
-            <div className={`project-desc-container ${expandedExperience['heca'] ? 'expanded' : ''}`}>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '0.75rem', fontStyle: 'italic' }}>
-                {t.experience.heca.desc}
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem', textAlign: 'left' }}>
-                {t.experience.heca.items.map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                    <CheckCircle2 size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '3px' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="skill-items" style={{ marginTop: '1.5rem' }}>
-              {['IT Support', 'Troubleshooting', 'APIs', 'Windows', 'Linux', 'Log Analysis', 'Networks'].map(tech => (
-                <div key={tech} className="mini-tech-tag">
-                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
-                  {tech}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="info-card glass"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <div className="info-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <img src={MUNI_LOGO_URL} alt="Secretaría de Salud Pública" className="experience-logo-img" loading="lazy" />
-                <span className="info-role">{t.experience.salud.role}</span>
-              </div>
-              <span className="info-period">{t.experience.salud.period}</span>
-            </div>
-            <span className="info-company">{t.experience.salud.company}</span>
-
-            <button
-              className="description-toggle"
-              onClick={() => toggleExperience('salud')}
-              style={{ marginTop: '1rem' }}
-            >
-              {expandedExperience['salud'] ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-              <span>{lang === 'es' ? 'Descripción' : 'Description'}</span>
-            </button>
-
-            <div className={`project-desc-container ${expandedExperience['salud'] ? 'expanded' : ''}`}>
-              <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem', textAlign: 'left' }}>
-                {t.experience.salud.items.map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                    <CheckCircle2 size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '3px' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="skill-items" style={{ marginTop: '1.5rem' }}>
-              {['SQL', 'Troubleshooting', 'APIs', 'Functional Analysis', 'Continuous Improvement'].map(tech => (
-                <div key={tech} className="mini-tech-tag">
-                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
-                  {tech}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      <motion.section
-        id="skills"
-        className="container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="section-title gradient-text">{t.skills.title}</h2>
-        <div className="skills-container">
-          {skillCategories.map((cat, idx) => (
-            <motion.div
-              key={cat.id}
-              className="skill-category-card glass"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -5, borderColor: 'var(--accent-primary)' }}
-            >
-              <h3 className="skill-category-title">{cat.icon} {cat.title}</h3>
-              <div className="skill-items">
-                {cat.skills.map(s => (
-                  <motion.div
-                    key={s.name}
-                    className="skill-tag"
-                    whileHover={{ scale: 1.1 }}
+          {/* SKILLS */}
+          <Section id="skills" title={t.skills.title}>
+            <div className="stack">
+              <div className="stack-tabs" role="tablist">
+                {skillCategories.map(cat => (
+                  <button
+                    key={cat.id} role="tab" aria-selected={activeSkill === cat.id}
+                    className={`stack-tab ${activeSkill === cat.id ? 'active' : ''}`}
+                    onClick={() => setActiveSkill(cat.id)}
                   >
-                    {s.src ? <img src={s.src} alt={s.name} className={`skill-icon${s.className ? ' ' + s.className : ''}`} /> : s.icon}
-                    {s.name}
-                  </motion.div>
+                    <span className="icon-bubble sm">{cat.icon}</span>
+                    <span className="stack-tab-title">{cat.title}</span>
+                    <span className="stack-count">{cat.skills.length}</span>
+                  </button>
                 ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section
-        id="certs"
-        className="container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="section-title gradient-text">{t.certifications.title}</h2>
-        <div className="skills-container">
-          {certificationsData.map((cat, idx) => (
-            <motion.div
-              key={idx}
-              className="skill-category-card glass"
-              style={{ height: 'auto' }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -5, borderColor: 'var(--accent-primary)' }}
-            >
-              <h3 className="skill-category-title">
-                {cat.category === 'Core & Languages' && <Globe2 size={22} />}
-                {cat.category === 'Cloud & Backend' && <Server size={22} />}
-                {cat.category === 'Data Science, AI & Python' && <BarChart size={22} />}
-                {cat.category === 'Frontend & Web Development' && <Layers size={22} />}
-                {cat.category === 'Agile & Soft Skills' && <ShieldCheck size={22} />}
-                {cat.category}
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                {cat.certs.map(cert => (
-                  <div key={cert.id} style={{ borderLeft: '2px solid var(--accent-primary)', paddingLeft: '1rem' }}>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 600 }}>{cert.title}</div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                      {cert.issuer} • {cert.year}
-                    </div>
+              {skillCategories.filter(cat => cat.id === activeSkill).map(cat => (
+                <div key={cat.id} className="stack-panel" role="tabpanel">
+                  <h3 className="stack-panel-title">{cat.title}</h3>
+                  <div className="tiles">
+                    {cat.skills.map(s => (
+                      <div key={s.name} className="tile">
+                        <span className="tile-icon">
+                          {s.src
+                            ? <img src={s.src} alt="" className={s.className || ''} />
+                            : s.icon}
+                        </span>
+                        <span className="tile-name">{s.name}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
+                </div>
+              ))}
+            </div>
+          </Section>
 
-      <motion.section
-        id="projects"
-        className="container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="section-title gradient-text">{t.nav.projects}</h2>
-        <h3 className="section-subtitle"><Briefcase size={28} /> {t.projects.group}</h3>
-        <div className="projects-grid">
-          {projectsData.filter(p => p.type === 'group').map((project, idx) => (
-            <motion.div
-              key={project.id}
-              className="project-card glass hover-highlight"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -10 }}
-            >
-              <div className="project-img-wrapper">
-                {project.image ? (
-                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    loading="lazy"
-                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-                ) : (
-                  <div className="project-img-placeholder">
-                    <Code2 size={48} />
+          {/* CERTS */}
+          <Section id="certs" title={t.certifications.title}>
+            <div className="rows">
+              {certificationsData.map((cat, idx) => (
+                <div key={idx} className="row skill">
+                  <h3 className="skill-title">
+                    <span className="icon-bubble sm">{certIcon(cat.category)}</span>
+                    {cat.category}
+                  </h3>
+                  <div className="certs">
+                    {cat.certs.map(cert => (
+                      <div key={cert.id} className="cert">
+                        <div className="cert-title">{cert.title}</div>
+                        <div className="muted small">{cert.issuer} • {cert.year}</div>
+                      </div>
+                    ))}
                   </div>
-                )}
-                <div className="project-img-placeholder" style={{ display: 'none' }}><Code2 size={48} /></div>
-              </div>
-              <div className="project-info">
-                <div className="project-header-side" style={{ justifyContent: 'center', width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                  <h4 className="project-title">{lang === 'es' ? project.title : (project.enTitle || project.title)}</h4>
                 </div>
+              ))}
+            </div>
+          </Section>
 
-                <button
-                  className="description-toggle"
-                  onClick={() => toggleProject(project.id)}
-                  style={{ alignSelf: 'center' }}
-                >
-                  {expandedProjects[project.id] ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                  <span>{lang === 'es' ? 'Descripción' : 'Description'}</span>
-                </button>
+          {/* PROJECTS */}
+          <Section id="projects" title={t.nav.projects}>
+            <h3 className="sub-title"><Briefcase size={22} /> {t.projects.group}</h3>
+            <div className="projs">
+              {projectsData.filter(p => p.type === 'group').map(p => (
+                <ProjectRow key={p.id} p={p} lang={lang} group
+                  open={!!expandedItems[p.id]} onToggle={() => toggleItem(p.id)} />
+              ))}
+            </div>
+            <h3 className="sub-title mt"><Code2 size={22} /> {t.projects.individual}</h3>
+            <div className="projs">
+              {projectsData.filter(p => p.type === 'individual').map(p => (
+                <ProjectRow key={p.id} p={p} lang={lang}
+                  open={!!expandedItems[p.id]} onToggle={() => toggleItem(p.id)} />
+              ))}
+            </div>
+          </Section>
 
-                <div className={`project-desc-container ${expandedProjects[project.id] ? 'expanded' : ''}`}>
-                  <p className="project-desc">
-                    {lang === 'es' ? project.description : project.enDescription}
-                  </p>
-                </div>
+          {/* CONTACT */}
+          <Section id="contact" title={t.contact.title}>
+            <div className="contact">
+              <ul className="contact-list">
+                {contactCards.map(({ icon: Icon, label, href, ext }) => {
+                  const inner = <><span className="icon-bubble sm"><Icon size={18} /></span><span>{label}</span></>;
+                  return (
+                    <li key={label}>
+                      {href
+                        ? <a href={href} {...(ext ? { target: '_blank', rel: 'noreferrer' } : {})} className="contact-item">{inner}</a>
+                        : <div className="contact-item">{inner}</div>}
+                    </li>
+                  );
+                })}
+              </ul>
 
-                <div className="skill-items" style={{ marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                  {project.techs.map(tech => (
-                    <div key={tech} className="mini-tech-tag">
-                      {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
-                      {tech}
-                    </div>
+              <div className="form-wrap">
+                <h3 className="sub-title">{t.contact.subtitle}</h3>
+                <form className="form" onSubmit={handleSubmit}>
+                  {formFields.map(([type, name, ph]) => (
+                    <input
+                      key={name} type={type} name={name} className="input"
+                      placeholder={ph} value={formState[name]} onChange={handleFormChange} required
+                    />
                   ))}
-                </div>
-
-                <div className="project-actions" style={{ width: '100%' }}>
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noreferrer" className="project-btn">
-                      <ExternalLink size={16} /> Live
-                    </a>
-                  )}
-                  {project.id === 'veterinaria' && (
-                    <a href="https://www.youtube.com/watch?v=_UIGXiYF8HM" target="_blank" rel="noreferrer" className="project-btn" style={{ borderColor: '#ff0000', color: '#ff0000' }}>
-                      <Youtube size={16} /> Demo
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a href={project.repoUrl} target="_blank" rel="noreferrer" className="project-btn">
-                      <Github size={16} /> {project.repoUrlBackend ? 'Frontend' : 'Repo'}
-                    </a>
-                  )}
-                  {project.repoUrlBackend && (
-                    <a href={project.repoUrlBackend} target="_blank" rel="noreferrer" className="project-btn">
-                      <Server size={16} /> Backend
-                    </a>
-                  )}
-                </div>
+                  <textarea
+                    name="message" className="input textarea" placeholder={t.contact.formMessage}
+                    value={formState.message} onChange={handleFormChange} required
+                  />
+                  <button type="submit" className="btn btn-primary block" disabled={isSubmitting}>
+                    {isSubmitting
+                      ? <span>{lang === 'es' ? 'Enviando...' : 'Sending...'}</span>
+                      : <><Send size={18} /> {t.contact.formSend}</>}
+                  </button>
+                  <AnimatePresence>
+                    {submitStatus === 'success' && (
+                      <motion.div className="status ok" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                        {lang === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!'}
+                      </motion.div>
+                    )}
+                    {submitStatus === 'error' && (
+                      <motion.div className="status err" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                        {lang === 'es' ? 'Hubo un error. Inténtalo de nuevo.' : 'Something went wrong. Please try again.'}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </form>
               </div>
-            </motion.div>
-          ))}
-        </div>
-        <h3 className="section-subtitle"><Code2 size={28} /> {t.projects.individual}</h3>
-        <div className="projects-grid">
-          {projectsData.filter(p => p.type === 'individual').map((project, idx) => (
-            <motion.div
-              key={project.id}
-              className="project-card glass hover-highlight"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -10 }}
-            >
-              <div className="project-img-wrapper">
-                {project.image ? (
-                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    loading="lazy"
-                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-                ) : (
-                  <div className="project-img-placeholder">
-                    <Code2 size={48} />
-                  </div>
-                )}
-                <div className="project-img-placeholder" style={{ display: 'none' }}><Code2 size={48} /></div>
-              </div>
-              <div className="project-info">
-                <div className="project-header-side" style={{ justifyContent: 'center', width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                  <h4 className="project-title">{lang === 'es' ? project.title : (project.enTitle || project.title)}</h4>
-                </div>
-
-                <button
-                  className="description-toggle"
-                  onClick={() => toggleProject(project.id)}
-                  style={{ alignSelf: 'center' }}
-                >
-                  {expandedProjects[project.id] ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                  <span>{lang === 'es' ? 'Descripción' : 'Description'}</span>
-                </button>
-
-                <div className={`project-desc-container ${expandedProjects[project.id] ? 'expanded' : ''}`}>
-                  <p className="project-desc">
-                    {lang === 'es' ? project.description : project.enDescription}
-                  </p>
-                </div>
-
-                <div className="skill-items" style={{ marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-                  {project.techs.map(tech => (
-                    <div key={tech} className="mini-tech-tag">
-                      {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
-                      {tech}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="project-actions" style={{ width: '100%' }}>
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noreferrer" className="project-btn">
-                      <ExternalLink size={16} /> Live
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a href={project.repoUrl} target="_blank" rel="noreferrer" className="project-btn">
-                      <Github size={16} /> Repo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-
-      <motion.section
-        id="contact"
-        className="container"
-        style={{ paddingBottom: '10rem' }}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="section-title gradient-text">{t.contact.title}</h2>
-        <div className="info-grid" style={{ marginBottom: '4rem' }}>
-          <motion.div
-            className="info-card glass"
-            style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -10 }}
-          >
-            <div className="p-4 bg-blue-500/10 rounded-full text-blue-500"><MapPin size={32} /></div>
-            <span className="info-company" style={{ marginBottom: 0 }}>{t.contact.location}</span>
-          </motion.div>
-          <motion.div
-            className="info-card glass"
-            style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            whileHover={{ y: -10 }}
-          >
-            <div className="p-4 bg-green-500/10 rounded-full text-green-500"><Phone size={32} /></div>
-            <span className="info-company" style={{ marginBottom: 0 }}>{t.contact.phone}</span>
-          </motion.div>
-          <motion.a
-            href={`mailto:${t.contact.email}`}
-            className="info-card glass"
-            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            whileHover={{ y: -10 }}
-          >
-            <div className="p-4 bg-purple-500/10 rounded-full text-purple-500"><Mail size={32} /></div>
-            <span className="info-company" style={{ marginBottom: 0 }}>{t.contact.email}</span>
-          </motion.a>
-          <motion.a
-            href={t.contact.github}
-            target="_blank"
-            rel="noreferrer"
-            className="info-card glass"
-            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            whileHover={{ y: -10 }}
-          >
-            <div className="p-4 bg-gray-500/10 rounded-full text-gray-500"><Github size={32} /></div>
-            <span className="info-company" style={{ marginBottom: 0 }}>GitHub</span>
-          </motion.a>
-          <motion.a
-            href="https://www.linkedin.com/in/miguel-rodr%C3%ADguez-eis/"
-            target="_blank"
-            rel="noreferrer"
-            className="info-card glass"
-            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            whileHover={{ y: -10 }}
-          >
-            <div className="p-4 bg-blue-600/10 rounded-full text-blue-600"><Globe2 size={32} /></div>
-            <span className="info-company" style={{ marginBottom: 0 }}>LinkedIn</span>
-          </motion.a>
-          <motion.a
-            href={t.contact.salesforce}
-            target="_blank"
-            rel="noreferrer"
-            className="info-card glass"
-            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            whileHover={{ y: -10 }}
-          >
-            <div className="p-4 bg-sky-500/10 rounded-full text-sky-500"><Cloud size={32} /></div>
-            <span className="info-company" style={{ marginBottom: 0 }}>Salesforce Trailblazer</span>
-          </motion.a>
-        </div>
-
-        <div className="glass p-8 mx-auto" style={{ borderRadius: '2.5rem', maxWidth: '900px', padding: '4rem', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
-          <h3 className="section-title gradient-text" style={{ fontSize: '2rem', marginBottom: '2rem' }}>{t.contact.subtitle}</h3>
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                className="form-input"
-                placeholder={t.contact.formName}
-                style={{ padding: '1.2rem' }}
-                value={formState.name}
-                onChange={handleFormChange}
-                required
-              />
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="subject"
-                className="form-input"
-                placeholder={t.contact.formSubject}
-                style={{ padding: '1.2rem' }}
-                value={formState.subject}
-                onChange={handleFormChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                className="form-input"
-                placeholder={t.contact.formEmail}
-                style={{ padding: '1.2rem' }}
-                value={formState.email}
-                onChange={handleFormChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <textarea
-                name="message"
-                className="form-textarea"
-                placeholder={t.contact.formMessage}
-                style={{ padding: '1.2rem' }}
-                value={formState.message}
-                onChange={handleFormChange}
-                required
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className={`btn btn-primary ${isSubmitting ? 'loading' : ''}`}
-              disabled={isSubmitting}
-              style={{ marginTop: '1.5rem', width: '100%', padding: '1.2rem', justifyContent: 'center', fontSize: '1.1rem' }}
-            >
-              {isSubmitting ? (
-                <span>{lang === 'es' ? 'Enviando...' : 'Sending...'}</span>
-              ) : (
-                <>
-                  <Send size={20} /> {t.contact.formSend}
-                </>
-              )}
-            </button>
+          </Section>
+        </main>
 
-            <AnimatePresence>
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  style={{ color: '#10b981', marginTop: '1rem', textAlign: 'center', fontWeight: 500 }}
-                >
-                  {lang === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!'}
-                </motion.div>
-              )}
-              {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  style={{ color: '#ef4444', marginTop: '1rem', textAlign: 'center', fontWeight: 500 }}
-                >
-                  {lang === 'es' ? 'Hubo un error. Inténtalo de nuevo.' : 'Something went wrong. Please try again.'}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </form>
-        </div>
-      </motion.section>
-
-      <footer className="footer-main">
-        <div className="container">
+        {/* FOOTER */}
+        <footer className="footer">
           <div className="footer-grid">
-            <motion.div
-              className="footer-brand"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="gradient-text">MIGUEL.DEV</h2>
-              <p className="footer-bio">
-                {t.footer.bio}
-              </p>
-              <div className="footer-contact-item" style={{ border: 'none', padding: 0 }}>
-                <MapPin size={18} className="text-cyan-400" />
-                <span>Rosario, Santa Fe, Argentina</span>
-              </div>
-              <div className="skill-items" style={{ marginTop: '1.5rem' }}>
-                <img src={getTechIcon('Python')} className="skill-icon" />
-                <img src={getTechIcon('Pandas')} className="skill-icon" />
-                <img src={getTechIcon('PostgreSQL')} className="skill-icon" />
-                <img src={getTechIcon('Node.js')} className="skill-icon" />
-                <img src={getTechIcon('React')} className="skill-icon" />
-              </div>
-            </motion.div>
-
-            <div className="footer-nav">
-              <span className="footer-col-title">{lang === 'es' ? 'Navegación' : 'Navigation'}</span>
-              <div className="footer-links">
-                <a href="#hero" className="footer-link"><ArrowUp size={16} /> {lang === 'es' ? 'Inicio' : 'Home'}</a>
-                <a href="#about" className="footer-link"><Briefcase size={16} /> {t.nav.about}</a>
-                <a href="#education" className="footer-link"><GraduationCap size={16} /> {t.education.title}</a>
-                <a href="#experience" className="footer-link"><Activity size={16} /> {t.experience.title}</a>
-                <a href="#skills" className="footer-link"><Layers size={16} /> {t.skills.title}</a>
-                <a href="#projects" className="footer-link"><Code2 size={16} /> {t.nav.projects}</a>
-                <a href="#contact" className="footer-link"><Mail size={16} /> {t.contact.title}</a>
+            <div className="footer-col">
+              <h2 className="brand big">
+                <span className="mark">MR</span>
+                <span className="brand-name">Miguel Rodríguez</span>
+              </h2>
+              <p className="muted">{t.footer.bio}</p>
+              <div className="flink"><MapPin size={16} /> Rosario, Santa Fe, Argentina</div>
+              <div className="footer-icons">
+                {['Python', 'Pandas', 'PostgreSQL', 'Node.js', 'React'].map(n => (
+                  <img key={n} src={getTechIcon(n)} alt={n} />
+                ))}
               </div>
             </div>
 
-            <div className="footer-contact">
-              <span className="footer-col-title">{lang === 'es' ? 'Contacto Rápido' : 'Quick Contact'}</span>
-              <a href={`mailto:${t.contact.email}`} className="footer-contact-item">
-                <Mail size={18} />
-                <span>{t.contact.email}</span>
-              </a>
-              <div className="footer-contact-item">
-                <Phone size={18} />
-                <span>{t.contact.phone}</span>
-              </div>
-              <button onClick={() => setShowCvModal(true)} className="footer-contact-item" style={{ color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)', background: 'none', width: '100%', cursor: 'pointer' }}>
-                <FileDown size={18} />
-                <span>{lang === 'es' ? 'Descargar CV' : 'Download CV'}</span>
+            <div className="footer-col">
+              <span className="col-title">{lang === 'es' ? 'Navegación' : 'Navigation'}</span>
+              <a href="#hero" className="flink"><ArrowUp size={16} /> {lang === 'es' ? 'Inicio' : 'Home'}</a>
+              <a href="#about" className="flink"><Briefcase size={16} /> {t.nav.about}</a>
+              <a href="#education" className="flink"><GraduationCap size={16} /> {t.education.title}</a>
+              <a href="#experience" className="flink"><Activity size={16} /> {t.experience.title}</a>
+              <a href="#skills" className="flink"><Layers size={16} /> {t.skills.title}</a>
+              <a href="#projects" className="flink"><Code2 size={16} /> {t.nav.projects}</a>
+              <a href="#contact" className="flink"><Mail size={16} /> {t.contact.title}</a>
+            </div>
+
+            <div className="footer-col">
+              <span className="col-title">{lang === 'es' ? 'Contacto Rápido' : 'Quick Contact'}</span>
+              <a href={`mailto:${t.contact.email}`} className="flink box"><Mail size={16} /> {t.contact.email}</a>
+              <div className="flink box"><Phone size={16} /> {t.contact.phone}</div>
+              <button onClick={() => setShowCvModal(true)} className="flink box accent">
+                <FileDown size={16} /> {lang === 'es' ? 'Descargar CV' : 'Download CV'}
               </button>
             </div>
 
-            <div className="footer-social">
-              <span className="footer-col-title">{lang === 'es' ? 'Redes Sociales' : 'Social Media'}</span>
-              <div className="footer-social-grid">
-                <a href={t.contact.github} target="_blank" rel="noreferrer" className="social-pill">
-                  <Github size={18} /> GitHub
-                </a>
-                <a href={t.contact.linkedin} target="_blank" rel="noreferrer" className="social-pill">
-                  <Linkedin size={18} /> LinkedIn
-                </a>
-                <a href={t.contact.salesforce} target="_blank" rel="noreferrer" className="social-pill">
-                  <Cloud size={18} /> Salesforce
-                </a>
-                <a href={`mailto:${t.contact.email}`} className="social-pill">
-                  <Mail size={18} /> Email
-                </a>
-                <a href={`https://wa.me/${t.contact.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="social-pill">
-                  <MessageSquare size={18} /> WhatsApp
+            <div className="footer-col">
+              <span className="col-title">{lang === 'es' ? 'Redes Sociales' : 'Social Media'}</span>
+              <div className="social">
+                <a href={t.contact.github} target="_blank" rel="noreferrer"><Github size={16} /> GitHub</a>
+                <a href={t.contact.linkedin} target="_blank" rel="noreferrer"><Linkedin size={16} /> LinkedIn</a>
+                <a href={t.contact.salesforce} target="_blank" rel="noreferrer"><Cloud size={16} /> Salesforce</a>
+                <a href={`mailto:${t.contact.email}`}><Mail size={16} /> Email</a>
+                <a href={`https://wa.me/${t.contact.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer">
+                  <MessageSquare size={16} /> WhatsApp
                 </a>
               </div>
             </div>
@@ -1165,42 +644,37 @@ function App() {
 
           <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Miguel Rodríguez. {t.footer.rights}</p>
-            <div style={{ opacity: 0.7, letterSpacing: '1px' }}>{t.footer.version}</div>
+            <span>{footerVersion}</span>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
+
+      {/* CV MODAL */}
       <AnimatePresence>
         {showCvModal && (
           <motion.div
             className="modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setShowCvModal(false)}
-            style={{ zIndex: 100000 }}
           >
             <motion.div
-              className="modal-content glass"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
+              className="modal"
+              initial={{ scale: 0.95, opacity: 0, y: 16 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 16 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <FileDown size={48} className="modal-icon" />
+              <span className="icon-bubble lg"><FileDown size={32} /></span>
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
-              <p>
+              <p className="muted">
                 {lang === 'es'
-                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.21):'
-                  : 'Select in which language you wish to download the CV (v1.21):'}
+                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.24):'
+                  : 'Select in which language you wish to download the CV (v1.24):'}
               </p>
-              <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
-                <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>
-                  {t.about.downloadCvSpanish}
-                </button>
-                <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('en')}>
-                  {t.about.downloadCvEnglish}
-                </button>
-                <button className="btn btn-outline" style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }} onClick={() => setShowCvModal(false)}>
+              <div className="modal-actions">
+                <button className="btn btn-primary block" onClick={() => handleDownloadCv('es')}>{t.about.downloadCvSpanish}</button>
+                <button className="btn btn-primary block" onClick={() => handleDownloadCv('en')}>{t.about.downloadCvEnglish}</button>
+                <button className="btn btn-ghost block" onClick={() => setShowCvModal(false)}>
                   {lang === 'es' ? 'Cerrar' : 'Close'}
                 </button>
               </div>
