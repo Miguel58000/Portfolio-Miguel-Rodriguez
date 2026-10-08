@@ -7,10 +7,11 @@ import {
   FileDown, Moon, Sun, Languages, Github, ExternalLink, Code2, Server, Globe2, Briefcase,
   Database, ShieldCheck, BarChart, LayoutDashboard, Mail, Phone, MapPin, GraduationCap,
   Layers, Terminal, Cloud, CheckCircle2, Send, Cpu, PenTool, FileText, Activity, Building2, ChevronDown, ChevronUp,
-  Instagram, Linkedin, MessageSquare, ArrowUp, Youtube, Menu, X
+  Instagram, Linkedin, MessageSquare, ArrowUp, Youtube, Menu, X, Brain, Sparkles, Award
 } from 'lucide-react';
 
-const MUNI_LOGO_URL = "/Logo.png";
+const UTN_LOGO_URL = "/Logo%20UTN.png";
+const MUNI_LOGO_URL = "/Logo%20Muni.png";
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
@@ -43,7 +44,7 @@ function App() {
 
   // Scroll spy implementation
   useEffect(() => {
-    const sections = ['hero', 'about', 'experience', 'skills', 'certs', 'projects', 'education', 'contact'];
+    const sections = ['hero', 'about', 'education', 'experience', 'skills', 'certs', 'projects', 'contact'];
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 150;
@@ -64,8 +65,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
-
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   const toggleLang = () => setLang(prev => prev === 'es' ? 'en' : 'es');
 
@@ -75,8 +74,8 @@ function App() {
   const handleDownloadCv = (downloadLang) => {
     const targetLang = downloadLang || lang;
     const link = document.createElement('a');
-    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.22-${Date.now()}` : `/cv-en.pdf?v=1.22-${Date.now()}`;
-    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.22.pdf`;
+    link.href = targetLang === 'es' ? `/cv-es.pdf?v=1.23-${Date.now()}` : `/cv-en.pdf?v=1.23-${Date.now()}`;
+    link.download = `CV_Miguel_Rodriguez_${targetLang.toUpperCase()}_v1.23.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -94,7 +93,6 @@ function App() {
     setSubmitStatus(null);
 
     try {
-      // Usamos FormSubmit.co (es gratuito, no requiere cuenta y es muy sencillo)
       const response = await fetch("https://formsubmit.co/ajax/miguelrodriguezips36@gmail.com", {
         method: "POST",
         headers: {
@@ -120,42 +118,112 @@ function App() {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
-      // Ocultar el mensaje después de 5 segundos
       setTimeout(() => setSubmitStatus(null), 5000);
     }
   };
 
   const skillCategories = [
     {
-      id: 'backend',
-      icon: <Server size={22} />,
-      title: t.skills.categories.backend,
+      id: 'dataAnalytics',
+      icon: <BarChart size={22} />,
+      title: t.skills.categories.dataAnalytics,
       skills: [
-        { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
-        { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
         { name: "Python", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
-        { name: "C#", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" },
-        { name: "PHP", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" },
-        { name: "C", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" },
-        { name: "Pascal", icon: <Terminal size={14} /> },
-        { name: "Smalltalk", icon: <Terminal size={14} /> },
-        { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
-        { name: "Prisma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" },
-        { name: "MikroORM", icon: <Database size={14} /> }
+        { name: "SQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg" },
+        { name: "Pandas", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" },
+        { name: "NumPy", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" },
+        { name: "Scikit-learn", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg" },
+        { name: "Power BI", src: "https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg" },
+        { name: "Tableau", src: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tableau.svg" },
+        { name: "KNIME", src: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/knime.svg" },
+        { name: "dbt", src: "/dbt-logo.svg", className: "dbt-logo-img" },
+        { name: "IBM SPSS Statistics", icon: <Activity size={14} /> },
+        { name: "IBM SPSS Modeler", icon: <Activity size={14} /> },
+        { name: "EDA (Exploratory Data Analysis)", icon: <Activity size={14} /> },
+        { name: "Data Cleaning & Validation", icon: <CheckCircle2 size={14} /> },
+        { name: "Dashboards & KPIs", icon: <LayoutDashboard size={14} /> }
       ]
     },
     {
-      id: 'database',
-      icon: <Database size={22} />,
-      title: t.skills.categories.database,
+      id: 'aiMl',
+      icon: <Brain size={22} />,
+      title: t.skills.categories.aiMl,
       skills: [
-        { name: "MySQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
+        { name: "Machine Learning Fundamentals", icon: <Brain size={14} /> },
+        { name: "Predictive Modeling & Classification", icon: <Activity size={14} /> },
+        { name: "Clustering", icon: <Layers size={14} /> },
+        { name: "IBM SPSS Modeler", icon: <Activity size={14} /> },
+        { name: "Prompt Engineering", icon: <Sparkles size={14} /> },
+        { name: "Large Language Models (LLMs)", icon: <Cpu size={14} /> },
+        { name: "Neural Networks / Deep Learning", icon: <Brain size={14} /> }
+      ]
+    },
+    {
+      id: 'databases',
+      icon: <Database size={22} />,
+      title: t.skills.categories.databases,
+      skills: [
         { name: "PostgreSQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+        { name: "MySQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
         { name: "SQL Server", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg" },
-        { name: "Oracle", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
+        { name: "Oracle (PL/SQL)", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
         { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
-        { name: "Redis", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" },
         { name: "DB Design", icon: <Database size={14} /> }
+      ]
+    },
+    {
+      id: 'backendApis',
+      icon: <Server size={22} />,
+      title: t.skills.categories.backendApis,
+      skills: [
+        { name: "Node.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+        { name: "Express", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
+        { name: "Supabase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
+        { name: "REST APIs", icon: <Server size={14} /> },
+        { name: "JWT", icon: <ShieldCheck size={14} /> },
+        { name: "Firebase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
+        { name: "Postman", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
+        { name: "Integration Troubleshooting", icon: <Cpu size={14} /> }
+      ]
+    },
+    {
+      id: 'systemsSupport',
+      icon: <ShieldCheck size={22} />,
+      title: t.skills.categories.systemsSupport,
+      skills: [
+        { name: "Windows", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg" },
+        { name: "Linux", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" },
+        { name: "Software Installation & Config", icon: <Terminal size={14} /> },
+        { name: "Hardware Diagnostics", icon: <Cpu size={14} /> },
+        { name: "Workstations Support", icon: <Briefcase size={14} /> },
+        { name: "User Troubleshooting & Support", icon: <ShieldCheck size={14} /> }
+      ]
+    },
+    {
+      id: 'networking',
+      icon: <Globe2 size={22} />,
+      title: t.skills.categories.networking,
+      skills: [
+        { name: lang === 'es' ? "Configuración IP" : "IP Configuration", icon: <Terminal size={14} /> },
+        { name: lang === 'es' ? "Conectividad" : "Connectivity", icon: <Activity size={14} /> },
+        { name: "WiFi", icon: <Globe2 size={14} /> },
+        { name: lang === 'es' ? "Diagnóstico de Redes" : "Network Diagnostics", icon: <ShieldCheck size={14} /> }
+      ]
+    },
+    {
+      id: 'cloudTools',
+      icon: <Cloud size={22} />,
+      title: t.skills.categories.cloudTools,
+      skills: [
+        { name: "Firebase Auth / Firestore", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
+        { name: "AWS (IAM, EC2, S3)", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+        { name: "Git", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+        { name: "GitHub", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
+        { name: "Bitbucket", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bitbucket/bitbucket-original.svg" },
+        { name: "Jest", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jest/jest-plain.svg" },
+        { name: "Cypress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg" },
+        { name: "Scrum / Kanban", icon: <CheckCircle2 size={14} /> },
+        { name: "Salesforce", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/salesforce/salesforce-original.svg" }
       ]
     },
     {
@@ -164,74 +232,13 @@ function App() {
       title: t.skills.categories.frontend,
       skills: [
         { name: "React", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
-        { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
         { name: "Angular", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" },
-        { name: "Tailwind", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-        { name: "Zustand", icon: <Layers size={14} /> },
-        { name: "Material UI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg" },
-        { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
-        { name: "React Router", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg" },
-        { name: "Axure", icon: <PenTool size={14} /> },
-        { name: "Marvel", icon: <PenTool size={14} /> },
-        { name: "Vanilla CSS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
-        { name: "Framer Motion", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg" },
-        { name: "Recharts", icon: <Activity size={14} /> },
-        { name: "RxJS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rxjs/rxjs-original.svg" },
-        { name: "Lucide Icons", icon: <Layers size={14} /> }
-      ]
-    },
-    {
-      id: 'cloud',
-      icon: <Cloud size={22} />,
-      title: t.skills.categories.cloud,
-      skills: [
-        { name: "Docker", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
-        { name: "OCI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
-        { name: "Databricks", icon: <BarChart size={14} /> },
-        { name: "Cypress", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg" },
-        { name: "Postman", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" },
-        { name: "Firebase", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
-        { name: "Firebase Auth", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg" },
-        { name: "Cloud Firestore", icon: <Database size={14} /> },
-        { name: "Vercel", icon: <Cloud size={14} /> }
-      ]
-    },
-    {
-      id: 'eng',
-      icon: <Cpu size={22} />,
-      title: t.skills.categories.eng,
-      skills: [
-        { name: "UML", icon: <CheckCircle2 size={14} /> },
-        { name: "Bizagi", icon: <Activity size={14} /> },
-        { name: "AnyLogic", icon: <Activity size={14} /> },
-        { name: "Matlab", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matlab/matlab-original.svg" },
-        { name: "AutoCAD", icon: <PenTool size={14} /> },
-        { name: "IT Support", icon: <Briefcase size={14} /> },
-        { name: "Troubleshooting", icon: <Cpu size={14} /> },
-        { name: "Networks", icon: <Globe2 size={14} /> },
-        { name: "AI Agents & LLMs", icon: <Cpu size={14} /> },
-        { name: "Prompt Engineering", icon: <Cpu size={14} /> },
-        { name: "i18n (Internationalization)", icon: <Languages size={14} /> }
-      ]
-    },
-    {
-      id: 'tools',
-      icon: <Terminal size={22} />,
-      title: t.skills.categories.tools,
-      skills: [
-        { name: "Microsoft 365", icon: <Layers size={14} /> },
-        { name: "Excel", icon: <Briefcase size={14} /> },
-        { name: "Power BI", icon: <BarChart size={14} /> },
-        { name: "LaTeX", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/latex/latex-original.svg" },
-        { name: "Git", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
-        { name: "GitHub", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
-        { name: "Linux", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" },
-        { name: "Salesforce", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/salesforce/salesforce-original.svg" },
-        { name: "Pandas", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" },
-        { name: "NumPy", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" },
-        { name: "Continuous Improvement", icon: <Activity size={14} /> },
-        { name: "Vite", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" },
-        { name: "localStorage", icon: <Database size={14} /> }
+        { name: "Next.js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+        { name: "TypeScript", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+        { name: "JavaScript ES6+", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+        { name: "HTML5", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+        { name: "Modern CSS", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+        { name: "Vite", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" }
       ]
     }
   ];
@@ -239,31 +246,51 @@ function App() {
   const getTechIcon = (tech) => {
     const icons = {
       'Next.js 16': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+      'Next.js': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
       'React': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+      'React.js': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
       'Node.js': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
       'TypeScript': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
       'Python': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+      'Pandas': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg",
+      'NumPy': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg",
+      'Scikit-learn': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg",
       'Vite': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
       'Tailwind CSS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
       'MySQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
+      'PostgreSQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+      'SQL Server': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg",
+      'Oracle': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg",
+      'MongoDB': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+      'Supabase': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
       'JavaScript': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
       'Express': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
       'Linux': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
-      'C#': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg",
+      'Windows': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg",
       'Material UI': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg",
       'React Router': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg",
-      'PostgreSQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
       'Prisma': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
-      'MongoDB': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
       'Vanilla CSS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
       'Framer Motion': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
       'Angular': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg",
       'RxJS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rxjs/rxjs-original.svg",
       'Firebase': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
       'Firebase Auth': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
-      'Cloud Firestore': null,
-      'Lucide Icons': null,
-      'Vercel': null
+      'Firestore': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
+      'Cloud Firestore': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg",
+      'Git': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+      'GitHub': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+      'Bitbucket': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bitbucket/bitbucket-original.svg",
+      'Jest': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jest/jest-plain.svg",
+      'Cypress': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cypressio/cypressio-original.svg",
+      'AWS': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+      'Postman': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg",
+      'dbt': "/dbt-logo.svg",
+      'Salesforce': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/salesforce/salesforce-original.svg",
+      'Power BI': "https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg",
+      'Tableau': "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tableau.svg",
+      'KNIME': "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/knime.svg",
+      'SQL': "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg"
     };
     return icons[tech] || null;
   };
@@ -386,17 +413,31 @@ function App() {
               <ul className="value-list">
                 <li>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <Code2 className="value-icon" />
+                    <Brain className="value-icon" />
+                    <span className="value-label">{t.about.dataAiLabel}</span>
+                  </div>
+                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.dataAiDesc}</div>
+                </li>
+                <li>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
+                    <ShieldCheck className="value-icon" />
+                    <span className="value-label">{t.about.opsLabel}</span>
+                  </div>
+                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.opsDesc}</div>
+                </li>
+                <li>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
+                    <Database className="value-icon" />
                     <span className="value-label">{t.about.stackLabel}</span>
                   </div>
                   <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.stackDesc}</div>
                 </li>
                 <li>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <Server className="value-icon" />
-                    <span className="value-label">{t.about.opsLabel}</span>
+                    <Cloud className="value-icon" />
+                    <span className="value-label">{t.about.salesforceLabel}</span>
                   </div>
-                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.opsDesc}</div>
+                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.salesforceDesc}</div>
                 </li>
                 <li>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
@@ -404,13 +445,6 @@ function App() {
                     <span className="value-label">{t.about.englishLabel}</span>
                   </div>
                   <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.englishDesc}</div>
-                </li>
-                <li>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.3rem' }}>
-                    <Cpu className="value-icon" />
-                    <span className="value-label">{t.about.aiLabel}</span>
-                  </div>
-                  <div className="value-desc" style={{ paddingLeft: '2.3rem' }}>{t.about.aiDesc}</div>
                 </li>
               </ul>
             </div>
@@ -427,7 +461,7 @@ function App() {
         transition={{ duration: 0.8 }}
       >
         <h2 className="section-title gradient-text">{t.education.title}</h2>
-        <div className="info-grid">
+        <div className="info-grid info-grid-2col">
           <motion.div
             className="info-card glass"
             initial={{ opacity: 0, x: -30 }}
@@ -436,11 +470,14 @@ function App() {
             transition={{ duration: 0.5 }}
           >
             <div className="info-header">
-              <span className="info-role">{t.education.analista.degree}</span>
-              <span className="info-period">{t.education.analista.period}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
+                <GraduationCap size={28} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
+                <span className="info-role">{t.education.ingenieria.degree}</span>
+              </div>
+              <span className="info-period">{t.education.ingenieria.period}</span>
             </div>
-            <span className="info-company">{t.education.analista.school}</span>
-            <p className="project-desc">{t.education.analista.status}</p>
+            <span className="info-company">{t.education.ingenieria.school}</span>
+            <p className="project-desc">{t.education.ingenieria.status}</p>
           </motion.div>
           <motion.div
             className="info-card glass"
@@ -450,11 +487,14 @@ function App() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="info-header">
-              <span className="info-role">{t.education.ingenieria.degree}</span>
-              <span className="info-period">{t.education.ingenieria.period}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
+                <GraduationCap size={28} style={{ color: 'var(--accent-primary)', flexShrink: 0 }} />
+                <span className="info-role">{t.education.analista.degree}</span>
+              </div>
+              <span className="info-period">{t.education.analista.period}</span>
             </div>
-            <span className="info-company">{t.education.ingenieria.school}</span>
-            <p className="project-desc">{t.education.ingenieria.status}</p>
+            <span className="info-company">{t.education.analista.school}</span>
+            <p className="project-desc">{t.education.analista.status}</p>
           </motion.div>
         </div>
       </motion.section>
@@ -468,7 +508,9 @@ function App() {
         transition={{ duration: 0.8 }}
       >
         <h2 className="section-title gradient-text">{t.experience.title}</h2>
-        <div className="info-grid">
+
+        {/* Fila 1: UTN — ocupa todo el ancho */}
+        <div className="info-grid" style={{ gridTemplateColumns: '1fr', marginBottom: '2rem' }}>
           <motion.div
             className="info-card glass"
             initial={{ opacity: 0, y: 30 }}
@@ -478,7 +520,58 @@ function App() {
           >
             <div className="info-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <img src={MUNI_LOGO_URL} alt="Muni Rosario" className="muni-logo-img" loading="lazy" />
+                <img src={UTN_LOGO_URL} alt="UTN Rosario" className="experience-logo-img" loading="lazy" />
+                <span className="info-role">{t.experience.utn.role}</span>
+              </div>
+              <span className="info-period">{t.experience.utn.period}</span>
+            </div>
+            <span className="info-company">{t.experience.utn.company}</span>
+
+            <button
+              className="description-toggle"
+              onClick={() => toggleExperience('utn')}
+              style={{ marginTop: '1rem' }}
+            >
+              {expandedExperience['utn'] ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+              <span>{lang === 'es' ? 'Descripción' : 'Description'}</span>
+            </button>
+
+            <div className={`project-desc-container ${expandedExperience['utn'] ? 'expanded' : ''}`}>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '0.75rem', fontStyle: 'italic' }}>
+                {t.experience.utn.desc}
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem', textAlign: 'left' }}>
+                {t.experience.utn.items.map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                    <CheckCircle2 size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '3px' }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="skill-items" style={{ marginTop: '1.5rem' }}>
+              {['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'EDA', 'Clustering'].map(tech => (
+                <div key={tech} className="mini-tech-tag">
+                  {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
+                  {tech}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Fila 2: HECA + Salud — 2 columnas */}
+        <div className="info-grid info-grid-2col">
+          <motion.div
+            className="info-card glass"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            <div className="info-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <img src={MUNI_LOGO_URL} alt="Muni Rosario / HECA" className="experience-logo-img" loading="lazy" />
                 <span className="info-role">{t.experience.heca.role}</span>
               </div>
               <span className="info-period">{t.experience.heca.period}</span>
@@ -495,7 +588,10 @@ function App() {
             </button>
 
             <div className={`project-desc-container ${expandedExperience['heca'] ? 'expanded' : ''}`}>
-              <ul style={{ listStyle: 'none', padding: 0, marginTop: '1rem', textAlign: 'left' }}>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '0.75rem', fontStyle: 'italic' }}>
+                {t.experience.heca.desc}
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem', textAlign: 'left' }}>
                 {t.experience.heca.items.map((item, i) => (
                   <li key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                     <CheckCircle2 size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '3px' }} />
@@ -505,7 +601,7 @@ function App() {
               </ul>
             </div>
             <div className="skill-items" style={{ marginTop: '1.5rem' }}>
-              {['IT Support', 'Troubleshooting', 'Networks', 'Windows', 'Linux', 'Log Analysis', 'APIs'].map(tech => (
+              {['IT Support', 'Troubleshooting', 'APIs', 'Windows', 'Linux', 'Log Analysis', 'Networks'].map(tech => (
                 <div key={tech} className="mini-tech-tag">
                   {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
                   {tech}
@@ -513,16 +609,17 @@ function App() {
               ))}
             </div>
           </motion.div>
+
           <motion.div
             className="info-card glass"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
             <div className="info-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <img src={MUNI_LOGO_URL} alt="Muni Rosario" className="muni-logo-img" loading="lazy" />
+                <img src={MUNI_LOGO_URL} alt="Secretaría de Salud Pública" className="experience-logo-img" loading="lazy" />
                 <span className="info-role">{t.experience.salud.role}</span>
               </div>
               <span className="info-period">{t.experience.salud.period}</span>
@@ -539,7 +636,7 @@ function App() {
             </button>
 
             <div className={`project-desc-container ${expandedExperience['salud'] ? 'expanded' : ''}`}>
-              <ul style={{ listStyle: 'none', padding: 0, marginTop: '1rem', textAlign: 'left' }}>
+              <ul style={{ listStyle: 'none', padding: 0, marginTop: '0.5rem', textAlign: 'left' }}>
                 {t.experience.salud.items.map((item, i) => (
                   <li key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                     <CheckCircle2 size={16} style={{ color: 'var(--accent-primary)', flexShrink: 0, marginTop: '3px' }} />
@@ -549,7 +646,7 @@ function App() {
               </ul>
             </div>
             <div className="skill-items" style={{ marginTop: '1.5rem' }}>
-              {['Python', 'Pandas', 'NumPy', 'Frappe', 'SQL', 'Functional Analysis', 'Continuous Improvement', 'APIs'].map(tech => (
+              {['SQL', 'Troubleshooting', 'APIs', 'Functional Analysis', 'Continuous Improvement'].map(tech => (
                 <div key={tech} className="mini-tech-tag">
                   {getTechIcon(tech) && <img src={getTechIcon(tech)} className="skill-icon" style={{ width: 14, height: 14 }} />}
                   {tech}
@@ -588,7 +685,7 @@ function App() {
                     className="skill-tag"
                     whileHover={{ scale: 1.1 }}
                   >
-                    {s.src ? <img src={s.src} alt={s.name} className="skill-icon" /> : s.icon}
+                    {s.src ? <img src={s.src} alt={s.name} className={`skill-icon${s.className ? ' ' + s.className : ''}`} /> : s.icon}
                     {s.name}
                   </motion.div>
                 ))}
@@ -676,8 +773,8 @@ function App() {
                 <div className="project-img-placeholder" style={{ display: 'none' }}><Code2 size={48} /></div>
               </div>
               <div className="project-info">
-                <div className="project-header-side" style={{ justifyContent: 'center', width: '100%' }}>
-                  <h4 className="project-title">{project.title}</h4>
+                <div className="project-header-side" style={{ justifyContent: 'center', width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+                  <h4 className="project-title">{lang === 'es' ? project.title : (project.enTitle || project.title)}</h4>
                 </div>
 
                 <button
@@ -755,8 +852,8 @@ function App() {
                 <div className="project-img-placeholder" style={{ display: 'none' }}><Code2 size={48} /></div>
               </div>
               <div className="project-info">
-                <div className="project-header-side" style={{ justifyContent: 'center', width: '100%' }}>
-                  <h4 className="project-title">{project.title}</h4>
+                <div className="project-header-side" style={{ justifyContent: 'center', width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+                  <h4 className="project-title">{lang === 'es' ? project.title : (project.enTitle || project.title)}</h4>
                 </div>
 
                 <button
@@ -879,6 +976,21 @@ function App() {
             <div className="p-4 bg-blue-600/10 rounded-full text-blue-600"><Globe2 size={32} /></div>
             <span className="info-company" style={{ marginBottom: 0 }}>LinkedIn</span>
           </motion.a>
+          <motion.a
+            href={t.contact.salesforce}
+            target="_blank"
+            rel="noreferrer"
+            className="info-card glass"
+            style={{ textDecoration: 'none', color: 'inherit', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            whileHover={{ y: -10 }}
+          >
+            <div className="p-4 bg-sky-500/10 rounded-full text-sky-500"><Cloud size={32} /></div>
+            <span className="info-company" style={{ marginBottom: 0 }}>Salesforce Trailblazer</span>
+          </motion.a>
         </div>
 
         <div className="glass p-8 mx-auto" style={{ borderRadius: '2.5rem', maxWidth: '900px', padding: '4rem', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
@@ -983,19 +1095,18 @@ function App() {
             >
               <h2 className="gradient-text">MIGUEL.DEV</h2>
               <p className="footer-bio">
-                {lang === 'es'
-                  ? 'Ingeniero en Sistemas de Información especializado en desarrollo backend, arquitecturas cloud y automatización. Transformando desafíos técnicos en soluciones escalables y confiables.'
-                  : 'Information Systems Engineer specializing in backend development, cloud architectures, and automation. Transforming technical challenges into scalable and reliable solutions.'}
+                {t.footer.bio}
               </p>
               <div className="footer-contact-item" style={{ border: 'none', padding: 0 }}>
                 <MapPin size={18} className="text-cyan-400" />
                 <span>Rosario, Santa Fe, Argentina</span>
               </div>
               <div className="skill-items" style={{ marginTop: '1.5rem' }}>
-                <img src={getTechIcon('React')} className="skill-icon" />
-                <img src={getTechIcon('Node.js')} className="skill-icon" />
                 <img src={getTechIcon('Python')} className="skill-icon" />
-                <img src={getTechIcon('MySQL')} className="skill-icon" />
+                <img src={getTechIcon('Pandas')} className="skill-icon" />
+                <img src={getTechIcon('PostgreSQL')} className="skill-icon" />
+                <img src={getTechIcon('Node.js')} className="skill-icon" />
+                <img src={getTechIcon('React')} className="skill-icon" />
               </div>
             </motion.div>
 
@@ -1004,9 +1115,10 @@ function App() {
               <div className="footer-links">
                 <a href="#hero" className="footer-link"><ArrowUp size={16} /> {lang === 'es' ? 'Inicio' : 'Home'}</a>
                 <a href="#about" className="footer-link"><Briefcase size={16} /> {t.nav.about}</a>
+                <a href="#education" className="footer-link"><GraduationCap size={16} /> {t.education.title}</a>
                 <a href="#experience" className="footer-link"><Activity size={16} /> {t.experience.title}</a>
-                <a href="#projects" className="footer-link"><Code2 size={16} /> {t.nav.projects}</a>
                 <a href="#skills" className="footer-link"><Layers size={16} /> {t.skills.title}</a>
+                <a href="#projects" className="footer-link"><Code2 size={16} /> {t.nav.projects}</a>
                 <a href="#contact" className="footer-link"><Mail size={16} /> {t.contact.title}</a>
               </div>
             </div>
@@ -1033,8 +1145,11 @@ function App() {
                 <a href={t.contact.github} target="_blank" rel="noreferrer" className="social-pill">
                   <Github size={18} /> GitHub
                 </a>
-                <a href="https://linkedin.com/in/miguel-rodriguez-eis" target="_blank" rel="noreferrer" className="social-pill">
+                <a href={t.contact.linkedin} target="_blank" rel="noreferrer" className="social-pill">
                   <Linkedin size={18} /> LinkedIn
+                </a>
+                <a href={t.contact.salesforce} target="_blank" rel="noreferrer" className="social-pill">
+                  <Cloud size={18} /> Salesforce
                 </a>
                 <a href={`mailto:${t.contact.email}`} className="social-pill">
                   <Mail size={18} /> Email
@@ -1073,8 +1188,8 @@ function App() {
               <h3>{lang === 'es' ? 'Confirmar Descarga' : 'Confirm Download'}</h3>
               <p>
                 {lang === 'es'
-                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.22):'
-                  : 'Select in which language you wish to download the CV (v1.22):'}
+                  ? 'Selecciona en qué idioma deseas descargar el CV (v1.23):'
+                  : 'Select in which language you wish to download the CV (v1.23):'}
               </p>
               <div className="modal-actions" style={{ flexDirection: 'column', gap: '0.8rem' }}>
                 <button className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => handleDownloadCv('es')}>

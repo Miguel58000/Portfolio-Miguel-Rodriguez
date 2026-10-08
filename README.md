@@ -20,7 +20,7 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
   - Experiencia Laboral con descripciones desplegables (accordion).
   - Habilidades Técnicas con iconos dinámicos.
   - Certificaciones organizadas por categoría.
-  - Proyectos con enlaces a repositorios (Frontend/Backend), demas en vivo y presentaciones en video.
+  - Proyectos con enlaces a repositorios (Frontend/Backend), demos en vivo y presentaciones en video.
   - Formulario de contacto funcional.
 
 ## Stack Tecnológico
@@ -37,7 +37,12 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/Miguel58000/Portfolio-Miguel-Rodriguez.git
-   3. Instala las dependencias:
+   ```
+2. Entra en la carpeta del repositorio:
+   ```bash
+   cd Portfolio-Miguel-Rodriguez
+   ```
+3. Instala las dependencias:
    ```bash
    npm install
    ```
@@ -47,6 +52,13 @@ Este es mi portafolio profesional, diseñado con una estética moderna y de alta
    ```
 
 ##  Historial de Versiones (Changelog)
+- **v1.23 (07/10/2026)**:
+  - 🔬 **Research Experience**: Incorporación de la experiencia como Colaborador en Proyecto de Investigación (Ciencia de Datos) en la UTN, con su stack asociado (Python, Pandas, NumPy, Scikit-learn, EDA y Clustering).
+  - 🧭 **Profile Repositioning**: Nuevo título principal "Systems Analyst | Data & AI | Software" y resumen profesional actualizado.
+  - 🛠️ **Skills Update**: Incorporación de Tableau, KNIME, dbt, IBM SPSS Statistics/Modeler y Redes Neuronales / Deep Learning al stack de habilidades.
+  - 🔗 **Social**: Nuevo botón de Salesforce en redes sociales.
+  - 📂 **CV Update**: Actualización de los archivos CV en español e inglés.
+  - 🚀 **Maintenance**: Actualización de la versión global a v1.23 y de la fecha de última modificación.
 
 - **v1.22 (25/08/2026)**:
   - 📂 **CV Update**: Actualización de los archivos CV en español e inglés.
